@@ -1,5 +1,5 @@
 import React from "react";
-import { signUpWithEmail } from "../../Services/authService";
+import { logInWithEmail, signUpWithEmail } from "../../Services/authService";
 import { useNavigate } from "react-router-dom";
 
 const Authpage = () => {
@@ -31,6 +31,38 @@ const Authpage = () => {
         case "auth/weak-password":
           // TODO: Show Error Message on UI
           return { error: "Password must be at least 6 characters" };
+
+        default:
+          // TODO: Show Error Message on UI
+          return { error: "Authentication failed" };
+      }
+    }
+  };
+
+  const handleEmailSignIn = async (e) => {
+    e.preventDefault();
+
+    const _email = e.target.mail.value;
+    const _pwd = e.target.pwd.value;
+
+    const result = await logInWithEmail(_email, _pwd);
+    if (result.success) {
+      // TODO: Remove this Line
+      console.log("Login Successfully");
+      // Redirect to Dashboard
+      navigate.apply("/dashboard");
+    } else {
+      switch (result.error.code) {
+        case "auth/user-not-found":
+          // TODO: Redirect user to Sign up
+          return null;
+        case "auth/wrong-password":
+          // TODO: Show Error Message on UI
+          return null;
+
+        case "auth/invalid-email":
+          // TODO: Show Error Message on UI
+          return { error: "Invalid email address" };
 
         default:
           // TODO: Show Error Message on UI

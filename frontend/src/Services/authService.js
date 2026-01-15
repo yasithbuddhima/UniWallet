@@ -1,4 +1,7 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { logEvent } from "firebase/analytics";
 import { analytics, auth } from "../utils/firebase";
 
@@ -19,8 +22,31 @@ export async function signUpWithEmail(email, password) {
 
     localStorage.setItem("token", idToken);
     logEvent(analytics, "signUp", { method: "Email+Password" });
-    return { success: "true" };
+    return { success: true };
   } catch (error) {
-    return { success: "false", error: error };
+    return { success: false, error: error };
+  }
+}
+
+// Method to Log in with Email and Password
+export async function logInWithEmail(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    const user = userCredential.user;
+    const idToken = user.getIdToken();
+
+    // TODO: Send id token to backend and verify
+    // If success continue else throw an error
+
+    localStorage.setItem("token", idToken);
+    logEvent(analytics, "signIn", { method: "Email+Password" });
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error };
   }
 }
