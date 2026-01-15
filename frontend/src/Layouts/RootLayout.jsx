@@ -4,7 +4,7 @@ export default function RootLayout() {
   return (
     <>
       <nav>
-        <NavLink to="/">Dashboard</NavLink>
+        <NavLink to="/dashboard">Dashboard</NavLink>
         <NavLink to="/expenses">Expenses</NavLink>
         <NavLink to="/reminders">Reminders</NavLink>
         <NavLink to="/profile">Profile</NavLink>
