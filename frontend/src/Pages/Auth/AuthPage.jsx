@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Authpage.modules.css";
 
 const Authpage = () => {
   return (
