@@ -1,8 +1,10 @@
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import { logEvent } from "firebase/analytics";
 import { analytics, auth } from "../utils/firebase";
@@ -68,6 +70,29 @@ export async function loginWithGoogle() {
 
     localStorage.setItem("token", idToken);
     logEvent(analytics, "LogIn", { method: "Google" });
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error };
+  }
+}
+
+// Method To SignOut/LogOut
+export async function userSignout() {
+  try {
+    await signOut();
+    localStorage.removeItem("token");
+    logEvent(analytics, "SignOut");
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error };
+  }
+}
+
+// Method to delete User
+export async function deleteUserAndSignOut() {
+  try {
+    await deleteUser(auth);
+    localStorage.removeItem("token");
     return { success: true };
   } catch (error) {
     return { success: false, error: error };
