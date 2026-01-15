@@ -1,5 +1,9 @@
 import React from "react";
-import { logInWithEmail, signUpWithEmail } from "../../Services/authService";
+import {
+  logInWithEmail,
+  loginWithGoogle,
+  signUpWithEmail,
+} from "../../Services/authService";
 import { useNavigate } from "react-router-dom";
 
 const Authpage = () => {
@@ -17,7 +21,7 @@ const Authpage = () => {
       // TODO: Remove this Line
       console.log("Signed In Successfully");
       // Redirect to Dashboard
-      navigate.apply("/dashboard");
+      navigate("/dashboard");
     } else {
       switch (result.error.code) {
         case "auth/email-already-in-use":
@@ -50,7 +54,7 @@ const Authpage = () => {
       // TODO: Remove this Line
       console.log("Login Successfully");
       // Redirect to Dashboard
-      navigate.apply("/dashboard");
+      navigate("/dashboard");
     } else {
       switch (result.error.code) {
         case "auth/user-not-found":
@@ -63,6 +67,39 @@ const Authpage = () => {
         case "auth/invalid-email":
           // TODO: Show Error Message on UI
           return { error: "Invalid email address" };
+
+        default:
+          // TODO: Show Error Message on UI
+          return { error: "Authentication failed" };
+      }
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const result = await loginWithGoogle();
+    if (result.success) {
+      // TODO: Remove this Line
+      console.log("Login with Google Successfully");
+      // Redirect to Dashboard
+      navigate("/dashboard");
+    } else {
+      switch (result.error.code) {
+        case "auth/popup-blocked":
+          // TODO: Show Error Message on UI
+          return null;
+
+        case "auth/popup-closed-by-user":
+          // TODO: Show Error Message on UI
+          return null;
+        case "auth/account-exists-with-different-credential":
+          // TODO: Show Error Message on UI
+          return null;
+        case "auth/cancelled-popup-request":
+          // TODO: Show Error Message on UI
+          return null;
+        case "auth/network-request-failed":
+          // TODO: Show Error Message on UI
+          return null;
 
         default:
           // TODO: Show Error Message on UI

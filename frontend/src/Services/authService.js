@@ -1,6 +1,8 @@
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import { logEvent } from "firebase/analytics";
 import { analytics, auth } from "../utils/firebase";
@@ -45,6 +47,27 @@ export async function logInWithEmail(email, password) {
 
     localStorage.setItem("token", idToken);
     logEvent(analytics, "signIn", { method: "Email+Password" });
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error };
+  }
+}
+
+// Method to continue with Google
+export async function loginWithGoogle() {
+  try {
+    const provider = new GoogleAuthProvider();
+
+    const userCredential = await signInWithPopup(auth, provider);
+
+    const user = userCredential.user;
+    const idToken = user.getIdToken();
+
+    // TODO: Send id token to backend and verify
+    // If success continue else throw an error
+
+    localStorage.setItem("token", idToken);
+    logEvent(analytics, "LogIn", { method: "Google" });
     return { success: true };
   } catch (error) {
     return { success: false, error: error };
