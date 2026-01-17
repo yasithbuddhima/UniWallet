@@ -25,4 +25,25 @@ const createUserProfile = async (user) => {
   console.log(rsult);
 };
 
-module.exports = { createUserProfile, getUser };
+const deleteUserCompletely = async (uid) => {
+  try {
+    const expensesRef = db.collection("users").doc(uid).collection("expenses");
+
+    const snapshot = await expensesRef.get();
+
+    const batch = db.batch();
+
+    snapshot.forEach((doc) => batch.delete(doc.ref));
+
+    await batch.commit();
+
+    await db.collection("users").doc(uid).delete();
+    await auth.deleteUser(uid);
+
+    return { success: true };
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports = { createUserProfile, getUser, deleteUserCompletely };
