@@ -1,4 +1,4 @@
-import { db } from "../config/firebaseAdmin";
+const db = require("../config/firebaseAdmin");
 
 const getExpenses = async (uid) => {
   const snapshot = await db
