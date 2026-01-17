@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-import { auth } from "../config/firebaseAdmin";
+const { auth } = require("../config/firebaseAdmin");
+const {
+  createUserProfile,
+  getUser,
+  deleteUserCompletely,
+} = require("../services/user.service");
 
 router.post("/login", async (req, res) => {
   const { idToken } = req.body;
@@ -11,7 +16,8 @@ router.post("/login", async (req, res) => {
   try {
     const { uid, email } = await auth.verifyIdToken(idToken);
 
-    // TODO: Save user to firebase db
+    const user = await getUser(uid);
+    await createUserProfile(user);
 
     res.json({ success: true, uid, email, token: idToken });
   } catch (error) {
@@ -28,7 +34,7 @@ router.post("/delete", async (req, res) => {
   try {
     const { uid, email } = await auth.verifyIdToken(idToken);
 
-    // TODO: Remove user from firebase database
+    await deleteUserCompletely(uid);
 
     res.json({ success: true });
   } catch (error) {
