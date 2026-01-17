@@ -1,4 +1,12 @@
-const { db } = require("../config/firebaseAdmin");
+const { db, auth } = require("../config/firebaseAdmin");
+
+const getUser = async (uid) => {
+  try {
+    return await auth.getUser(uid);
+  } catch (error) {
+    return error;
+  }
+};
 
 const createUserProfile = async (user) => {
   const userRef = db.collection("users").doc(user.uid);
@@ -17,4 +25,4 @@ const createUserProfile = async (user) => {
   console.log(rsult);
 };
 
-module.exports = createUserProfile;
+module.exports = { createUserProfile, getUser };
