@@ -42,7 +42,7 @@ export async function logInWithEmail(email, password) {
     );
 
     const user = userCredential.user;
-    const idToken = user.getIdToken();
+    const idToken = await user.getIdToken();
 
     // TODO: Send id token to backend and verify
     // If success continue else throw an error
@@ -63,7 +63,7 @@ export async function loginWithGoogle() {
     const userCredential = await signInWithPopup(auth, provider);
 
     const user = userCredential.user;
-    const idToken = user.getIdToken();
+    const idToken = await user.getIdToken();
 
     // TODO: Send id token to backend and verify
     // If success continue else throw an error
