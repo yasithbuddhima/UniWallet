@@ -4,19 +4,21 @@ const { getExpenses, addExpense } = require("../services/expense.service");
 
 expenseRouter.get("/", async (req, res) => {
   try {
-    const expenses = await getExpenses(req.user.id);
-    res.status(201).json(expenses);
+    const expenses = await getExpenses(req.user.uid);
+    res.status(201).json(expenses || []);
   } catch (error) {
-    res.status(500).json({ error: error });
+    res
+      .status(500)
+      .json({ message: `Error getting all expenses: `, error: error.message });
   }
 });
 
 expenseRouter.post("/add", async (req, res) => {
   try {
-    const expense = await addExpense(req.user.id, req.body);
+    const expense = await addExpense(req.user.uid, req.body);
     res.status(201).json(expense);
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: error.message });
   }
 });
 

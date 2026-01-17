@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../utils/firebase";
 import { addExpense, getAllExpenses } from "../Services/expenseService";
+import { onAuthStateChanged } from "firebase/auth";
 
 const ExpenseContext = createContext();
 
@@ -8,9 +9,18 @@ export const ExpenseProvider = ({ children }) => {
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
-    auth.currentUser.getIdToken().then((token) => {
-      getAllExpenses(token).then(setExpenses);
+    const unsub = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        setExpenses([]);
+        return;
+      }
+
+      const token = await user.getIdToken();
+      const data = await getAllExpenses(token);
+      setExpenses(data);
     });
+
+    return () => unsub();
   }, []);
 
   const create = async (expense) => {
