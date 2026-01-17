@@ -9,6 +9,8 @@ import {
 import { logEvent } from "firebase/analytics";
 import { analytics, auth } from "../utils/firebase";
 
+const API_BASE = process.env.REACT_APP_BACKEND_API_BASE;
+
 // Function to Sign Up with Email And Password
 export async function signUpWithEmail(email, password) {
   try {
@@ -21,8 +23,14 @@ export async function signUpWithEmail(email, password) {
     const user = await userCredential.user;
     const idToken = await user.getIdToken();
 
-    // TODO: Send id token to backend and verify
-    // If success continue else throw an error
+    const res = await fetch(`${API_BASE}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message);
 
     localStorage.setItem("token", idToken);
     logEvent(analytics, "signUp", { method: "Email+Password" });
@@ -44,8 +52,14 @@ export async function logInWithEmail(email, password) {
     const user = userCredential.user;
     const idToken = await user.getIdToken();
 
-    // TODO: Send id token to backend and verify
-    // If success continue else throw an error
+    const res = await fetch(`${API_BASE}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message);
 
     localStorage.setItem("token", idToken);
     logEvent(analytics, "signIn", { method: "Email+Password" });
@@ -65,8 +79,14 @@ export async function loginWithGoogle() {
     const user = userCredential.user;
     const idToken = await user.getIdToken();
 
-    // TODO: Send id token to backend and verify
-    // If success continue else throw an error
+    const res = await fetch(`${API_BASE}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message);
 
     localStorage.setItem("token", idToken);
     logEvent(analytics, "LogIn", { method: "Google" });
