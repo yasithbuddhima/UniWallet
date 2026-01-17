@@ -22,7 +22,6 @@ const createUserProfile = async (user) => {
       merge: true,
     }
   );
-  console.log(rsult);
 };
 
 const deleteUserCompletely = async (uid) => {

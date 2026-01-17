@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
-app.use("/api/exspense", authMiddleware, expenseRoutes);
+app.use("/api/expense", authMiddleware, expenseRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend is working on port 5000" });

@@ -1,4 +1,4 @@
-const db = require("../config/firebaseAdmin");
+const { db } = require("../config/firebaseAdmin");
 
 const getExpenses = async (uid) => {
   const snapshot = await db
@@ -7,7 +7,6 @@ const getExpenses = async (uid) => {
     .collection("expenses")
     .orderBy("date", "desc")
     .get();
-
   return snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
@@ -21,7 +20,7 @@ const addExpense = async (uid, expense) => {
     .collection("expenses")
     .add({
       ...expense,
-      createdAt: new Date().toISOString,
+      createdAt: new Date().toISOString(),
     });
 
   return {
