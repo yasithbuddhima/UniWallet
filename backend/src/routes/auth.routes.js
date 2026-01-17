@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const admin = require("../config/firebaseAdmin");
+import { auth } from "../config/firebaseAdmin";
 
 router.post("/login", async (req, res) => {
   const { idToken } = req.body;
@@ -9,7 +9,7 @@ router.post("/login", async (req, res) => {
   if (!idToken) return res.status(401).json({ message: "Id token required" });
 
   try {
-    const { uid, email } = await admin.auth().verifyIdToken(idToken);
+    const { uid, email } = await auth.verifyIdToken(idToken);
 
     // TODO: Save user to firebase db
 
@@ -26,7 +26,7 @@ router.post("/delete", async (req, res) => {
   if (!idToken) return res.status(401).json({ message: "Id token Required" });
 
   try {
-    const { uid, email } = await admin.auth().verifyIdToken(idToken);
+    const { uid, email } = await auth.verifyIdToken(idToken);
 
     // TODO: Remove user from firebase database
 
