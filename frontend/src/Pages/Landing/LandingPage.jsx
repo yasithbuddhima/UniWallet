@@ -1,5 +1,14 @@
 import React from "react";
 import style from './LandingPage.module.css';
+import phoneimg from './phone.png';
+import financialimage1 from './financialimage1.png';
+import financialimage2 from './financialimage2.png';
+import trustimage1 from './trustimage1.png';
+import trustimage2 from './trustimage2.png';
+import trustimage3 from './trustimage3.png';
+import trustimage4 from './trustimage4.png'; 
+import trustimage5 from './trustimage5.png';
+import trustimage6 from './trustimage6.png';   
 
 const LandingPage = () => {
   return <><div className={style.body} >
@@ -22,10 +31,24 @@ const LandingPage = () => {
         <button className={style.btng2}>See how it works ↓</button>
         <p>⭐ 4.9/5 rating by 10k+ students.</p>
       </div>
-      {/*<div className={style.heroimage}>
-        <div className="phone">"C:\Users\DHANANJAYA\Pictures\Screenshots\Screenshot 2026-01-15 162531.png"</div>
-      </div> */}
+      <div className={style.heroimage}>
+          <img src={phoneimg} alt="phone" />
+        </div>
     </section>
+
+
+    <div className={style.trust}>
+      <h5>Used by smart students at over 500 universities globally.</h5>
+      <div className={style.trustimage}>
+        <img src={trustimage1} alt="university logo1" />
+        <img src={trustimage2} alt="university logo2" />
+        <img src={trustimage3} alt="university logo3" />
+        <img src={trustimage4} alt="university logo4" />
+        <img src={trustimage5} alt="university logo5" />
+        <img src={trustimage6} alt="university logo6" />
+      </div> 
+    </div>
+
 
 
 
@@ -48,11 +71,61 @@ const LandingPage = () => {
     </section>
 
 
+    <section className={style.financial1}>
+      <div className={style.financialtext1}>
+        <h3>Save for what matters.</h3>
+        <p>Set goals for spring break, concerts or a new laptop. watch your savings grow.</p>
+      </div>
+      <div className={style.financialimage1}>
+        <img src={financialimage1} />
+      </div>
+    </section>
+
+
+    <section className={style.financial2}>
+      <div className={style.financialimage2}>
+        <img src={financialimage2} />
+      </div>
+       <div className={style.financialtext2}>
+        <h3>Ditch the spreadsheet anxiety.</h3>
+        <p>No complicated formulas. Just clear, simple views of your financial health.</p>
+      </div>
+     
+    </section>
 
     <section className={style.cta}>
       <h1>Ready to take control<br/> of your finances?</h1>
+      <p>Join thousands of students making smarter money moves today.</p>
       <button className={style.btn2}>Create Your Free Uniwallet Account</button>
     </section>
+
+
+    <section className={style.endnote}>
+      <div className={style.endnotetext1}>
+        <h2>Uniwallet</h2>
+        <p>Set goals for spring break, avoid smarter money today</p>
+      </div>
+      <div className={style.endnotetext2}>
+        <div className={style.endnotetext}>
+          <p>Product</p>
+          <p>Features</p>
+          <p>Pricing</p>
+        </div>
+        <div className={style.endnotetext}>
+          <p>Company</p>
+          <p>About</p>
+          <p>Careers</p>
+        </div>
+        <div className={style.endnotetext}>
+          <p>Resources</p>
+          <p>Student Blog</p>
+          <p>Help Center</p>
+        </div>
+      </div>
+    </section>
+    <hr/>
+
+
     <section className={style.footer}>
       <p>© 2026 uniwallet. All rights reserved.</p>
     </section>
