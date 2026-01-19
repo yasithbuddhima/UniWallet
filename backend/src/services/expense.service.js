@@ -29,6 +29,27 @@ const addExpense = async (uid, expense) => {
   };
 };
 
-// TODO: Add method to delete expense and update expense
+const updateExpense = async (uid, expense) => {
+  const { id, ...newExpense } = expense;
+  const ref = await db
+    .collection("users")
+    .doc(uid)
+    .collection("expenses")
+    .doc(id)
+    .update(newExpense);
 
-module.exports = { getExpenses, addExpense };
+  return { id, ...newExpense };
+};
+
+const deleteExpense = async (uid, expenseId) => {
+  await db
+    .collection("users")
+    .doc(uid)
+    .collection("expenses")
+    .doc(expenseId)
+    .delete();
+
+  return { success: true };
+};
+
+module.exports = { getExpenses, addExpense, updateExpense, deleteExpense };
