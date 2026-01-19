@@ -44,28 +44,35 @@ const ExpensePage = () => {
 
             {/* Rows */}
             <div className={styles.expenseList}>
-              {/* //TODO: Add expenses ( use State ) */}
-              {/* {//TODO: Add Expty blocl if no expenses} */}
-              {expenses.map((tx) => (
-                <div
-                  key={tx.id}
-                  className={`${styles.expenseRow} , ${styles.gridRow}`}
-                >
-                  {/* Date */}
-                  <div className={styles.colDate}>{tx.date}</div>
-
-                  {/* Name */}
-                  <div className={styles.colName}>{tx.Name}</div>
-
-                  {/* Category Chip */}
-                  <div className={styles.colCategory}>
-                    <span className={styles.chip}>{tx.category}</span>
-                  </div>
-
-                  {/* Amount */}
-                  <div className={styles.colAmount}>-${tx.amount}</div>
+              {expenses.length === 0 ? (
+                <div className={styles.emptyState}>
+                  <p>No expenses found</p>
+                  <span>
+                    Add a new expense to start tracking your spending.
+                  </span>
                 </div>
-              ))}
+              ) : (
+                expenses.map((tx) => (
+                  <div
+                    key={tx.id}
+                    className={`${styles.expenseRow} , ${styles.gridRow}`}
+                  >
+                    {/* Date */}
+                    <div className={styles.colDate}>{tx.date}</div>
+
+                    {/* Name */}
+                    <div className={styles.colName}>{tx.Name}</div>
+
+                    {/* Category Chip */}
+                    <div className={styles.colCategory}>
+                      <span className={styles.chip}>{tx.category}</span>
+                    </div>
+
+                    {/* Amount */}
+                    <div className={styles.colAmount}>-${tx.amount}</div>
+                  </div>
+                ))
+              )}
             </div>
 
             <div className={styles.loadMoreContainer}>
