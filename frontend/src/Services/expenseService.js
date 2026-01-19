@@ -23,8 +23,8 @@ const addExpense = async (token, expense) => {
   return res.json();
 };
 
-const deleteExpense = async (token, expense) => {
-  const res = await fetch(`${API_BASE}/api/expense/delete`, {
+const updateExpense = async (token, expense) => {
+  const res = await fetch(`${API_BASE}/api/expense/add`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -36,4 +36,17 @@ const deleteExpense = async (token, expense) => {
   return res.json();
 };
 
-export { getAllExpenses, addExpense, deleteExpense };
+const deleteExpense = async (token, expenseId) => {
+  const res = await fetch(`${API_BASE}/api/expense/delete`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(expenseId),
+  });
+
+  return res.json();
+};
+
+export { getAllExpenses, addExpense, deleteExpense, updateExpense };
