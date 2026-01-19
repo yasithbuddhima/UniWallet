@@ -1,6 +1,11 @@
 const express = require("express");
 const expenseRouter = express.Router();
-const { getExpenses, addExpense } = require("../services/expense.service");
+const {
+  getExpenses,
+  addExpense,
+  updateExpense,
+  deleteExpense,
+} = require("../services/expense.service");
 
 expenseRouter.get("/", async (req, res) => {
   try {
@@ -22,6 +27,24 @@ expenseRouter.post("/add", async (req, res) => {
   }
 });
 
-// TODO: Implement methods to update and delete exspenses
+expenseRouter.post("/update", async (req, res) => {
+  try {
+    const expense = await updateExpense(req.user.uid, req.body);
+    res.status(201).json(expense);
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+});
+
+// Method to delete expenses
+// req.body should be the expense id
+expenseRouter.post("/delete", async (req, res) => {
+  try {
+    const success = deleteExpense(req.user.uid, req.body);
+    res.status(201).json(success);
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+});
 
 module.exports = expenseRouter;
