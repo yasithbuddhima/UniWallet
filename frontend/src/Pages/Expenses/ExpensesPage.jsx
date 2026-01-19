@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import styles from "./ExpensesPage.module.css";
 import AddExpenseComponent from "../../Components/AddExpense/AddExpense";
+import { useExpenses } from "../../context/ExpenseContext";
 
 const ExpensePage = () => {
-  const [expenses, setExpenses] = useState([]);
+  const { expenses, create } = useExpenses();
+  const [expensesCount, setExpensesCount] = useState(5);
+
   const [isAddExpense, setISAddExpense] = useState(false);
 
-  // TODO: Add function to handle new expense
+  const displayedExpenses = expenses.slice(0, expensesCount);
+
   const handleNewExpense = async (expense) => {
-    return null;
+    create(expense);
+    // TODO: Implement a toast
+    //?
+  };
+
+  const loadMore = () => {
+    setExpensesCount((prevCount) => prevCount + 5);
   };
   return (
     <>
@@ -19,7 +29,6 @@ const ExpensePage = () => {
               <h2>Expense History</h2>
               <button
                 className={styles.addBtn}
-                // TODO:  method to add expenses
                 onClick={() => setISAddExpense(!isAddExpense)}
               >
                 Add Expense
@@ -65,7 +74,7 @@ const ExpensePage = () => {
                   </span>
                 </div>
               ) : (
-                expenses.map((tx) => (
+                displayedExpenses.map((tx) => (
                   <div
                     key={tx.id}
                     className={`${styles.expenseRow} , ${styles.gridRow}`}
@@ -74,7 +83,7 @@ const ExpensePage = () => {
                     <div className={styles.colDate}>{tx.date}</div>
 
                     {/* Name */}
-                    <div className={styles.colName}>{tx.Name}</div>
+                    <div className={styles.colName}>{tx.title}</div>
 
                     {/* Category Chip */}
                     <div className={styles.colCategory}>
@@ -82,16 +91,21 @@ const ExpensePage = () => {
                     </div>
 
                     {/* Amount */}
-                    <div className={styles.colAmount}>-${tx.amount}</div>
+                    <div className={styles.colAmount}>
+                      - Rs. {Number(tx.amount).toLocaleString()}
+                    </div>
                   </div>
                 ))
               )}
             </div>
 
-            <div className={styles.loadMoreContainer}>
-              {/* //TODO: Add load more function */}
-              <button className={styles.btnLoadMore}>Load More expenses</button>
-            </div>
+            {expenses.length > expensesCount && (
+              <div className={styles.loadMoreContainer}>
+                <button className={styles.btnLoadMore} onClick={loadMore}>
+                  Load More expenses
+                </button>
+              </div>
+            )}
           </section>
         </main>
       </div>
