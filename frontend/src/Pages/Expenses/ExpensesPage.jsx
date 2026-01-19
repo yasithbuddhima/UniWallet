@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import styles from "./ExpensesPage.module.css";
+import AddExpenseComponent from "../../Components/AddExpense/AddExpense";
 
 const ExpensePage = () => {
   const [expenses, setExpenses] = useState([]);
+  const [isAddExpense, setISAddExpense] = useState(false);
+
+  // TODO: Add function to handle new expense
+  const handleNewExpense = async (expense) => {
+    return null;
+  };
   return (
     <>
       <div className={styles.container}>
@@ -13,11 +20,17 @@ const ExpensePage = () => {
               <button
                 className={styles.addBtn}
                 // TODO:  method to add expenses
-                onClick={() => null}
+                onClick={() => setISAddExpense(!isAddExpense)}
               >
                 Add Expense
               </button>
             </div>
+
+            <AddExpenseComponent
+              isOpen={isAddExpense}
+              onClose={() => setISAddExpense(false)}
+              onAdd={handleNewExpense}
+            />
 
             <div className={styles.filterRow}>
               <select className={styles.filterSelect}>
