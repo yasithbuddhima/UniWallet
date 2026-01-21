@@ -6,6 +6,7 @@ import { userSignout } from "../../Services/authService";
 
 const Navbar = () => {
   const user = auth.currentUser;
+  const defaultAvatar = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
   const navigate = useNavigate();
   const logout = async () => {
     try {
@@ -49,7 +50,7 @@ const Navbar = () => {
           <NavLink to="/profile" className={styles.profileLink}>
             {/* //TODO: Add dummy profile pic */}
             <img
-              src={user?.photoURL || null}
+              src={user?.photoURL || defaultAvatar}
               alt="Profile"
               className={styles.avatar}
             />
