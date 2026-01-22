@@ -1,0 +1,173 @@
+.pageContainer {
+  background-color: #121212;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: sans-serif;
+  color: #f1f5f9;
+  display: flex;
+  justify-content: center;
+}
+
+.contentBox {
+  width: 100%;
+  max-width: 800px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+.addBtn {
+  background-color: #84cc16;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.timeline {
+  border-left: 2px solid #374151;
+  padding-left: 24px;
+  margin-left: 8px;
+}
+.timeLabel {
+  color: #9ca3af;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.cardWrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.timelineDot {
+  position: absolute;
+  left: -31px;
+  top: 24px;
+  width: 12px;
+  height: 12px;
+  background-color: #374151;
+  border-radius: 50%;
+  border: 2px solid #121212;
+}
+
+.card {
+  background-color: #1f2933;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background-color: #2dd4bf;
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-left: 12px;
+}
+.icon {
+  font-size: 1.5rem;
+  margin-right: 16px;
+}
+
+.details {
+  flex-grow: 1;
+}
+.merchant {
+  display: block;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.subtext {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.priceAction {
+  min-width: 100px;
+  text-align: right;
+}
+.amount {
+  font-weight: bold;
+  font-size: 1rem;
+  display: block;
+}
+.payBtn {
+  display: none;
+  background-color: #84cc16;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card:hover .amount {
+  display: none;
+}
+.card:hover .payBtn {
+  display: block;
+  animation: fadeIn 0.2s;
+}
+
+.card.overdue::before {
+  background-color: #2dd4bf;
+}
+.overdueTag {
+  background: #2dd4bf;
+  color: black;
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 8px;
+}
+
+.card.paid {
+  opacity: 0.6;
+}
+.card.paid::before {
+  background-color: #84cc16;
+}
+
+.card.paid .merchant,
+.card.paid .amount {
+  text-decoration: line-through;
+}
+.card.paid:hover .amount {
+  display: block;
+}
+
+.card.paid:hover .payBtn {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
