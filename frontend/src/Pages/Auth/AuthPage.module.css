@@ -1,0 +1,143 @@
+.authpage {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2c5364;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.authcontainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  background-color: #2c5364;
+}
+
+.formslayer {
+  display: flex;
+  flex: 3;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  border-radius: 5px 0 0 5px;
+  background-color: #1c1c1c;
+}
+
+.formsignupform,
+.formloginform {
+  display: block;
+  color: #fff;
+}
+
+.formsignupform h2,
+.formloginform h2 {
+  font-size: 24px;
+  margin: 0 0 10px 0;
+}
+
+.formsignupform p,
+.formloginform p {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.formloginform input,
+.formsignupform input{
+  border-radius: 5px;
+}
+
+button {
+  border-radius: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #333;
+  background-color: #333;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  background-color: #00c896;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+button:hover {
+  background-color: #00a876;
+}
+
+.divider {
+  text-align: center;
+  color: #aaa;
+  margin: 15px 0;
+  font-size: 12px;
+}
+
+.googleBtn {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+.googleBtn:hover {
+  background-color: #f5f5f5;
+}
+
+.overlaypanel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #00c896;
+  color: #fff;
+  padding: 40px;
+  text-align: center;
+  border-radius: 0  8px 8px 0;
+}
+
+.overlaypanel h2 {
+  font-size: 20px;
+  margin: 0 0 10px 0;
+}
+
+.overlaypanel p {
+  font-size: 14px;
+  margin: 0 0 15px 0;
+  color: #fff;
+}
+
+.overlaypanel button {
+  background-color: #fff;
+  color: #00c896;
+}
+
+.overlaypanel button:hover {
+  background-color: #f0f0f0;
+ 
+}
+
