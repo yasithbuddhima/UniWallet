@@ -8,13 +8,15 @@ import trustimage2 from './trustimage2.png';
 import trustimage3 from './trustimage3.png';
 import trustimage4 from './trustimage4.png'; 
 import trustimage5 from './trustimage5.png';
-import trustimage6 from './trustimage6.png';   
+import trustimage6 from './trustimage6.png';
+import logo from './logo.png';
 
 const LandingPage = () => {
-  return <><div className={style.body} >
+  return <>
+  <div className={style.body} >
     
     <section className={style.navbar}>
-      <h2 className={style.logo}>uniwallet</h2>
+      <h2 className={style.logo}><img src={logo} alt="logo" className={style.logoimg} />uniwallet</h2>
       <div className={style.button}>
         <button className={style.login}>Login</button>
         <button className={style.btn}>Create New Account</button>
@@ -29,7 +31,7 @@ const LandingPage = () => {
         <p>Track expenses, save smartly and manage money easily.</p>
         <button className={style.btngreen}>Get Started in 30 seconds</button><br/>
         <button className={style.btng2}>See how it works ↓</button>
-        <p>⭐ 4.9/5 rating by 10k+ students.</p>
+        {/* <p>⭐ 4.9/5 rating by 10k+ students.</p> */}
       </div>
       <div className={style.heroimage}>
           <img src={phoneimg} alt="phone" />
@@ -101,11 +103,10 @@ const LandingPage = () => {
 
 
     <section className={style.endnote}>
-      <div className={style.endnotetext1}>
-        <h2>Uniwallet</h2>
+      <div className={style.endnotetext}>
+        <h2><img src={logo} alt="logo" className={style.logoimg} />Uniwallet</h2>
         <p>Set goals for spring break, avoid smarter money today</p>
       </div>
-      <div className={style.endnotetext2}>
         <div className={style.endnotetext}>
           <p>Product</p>
           <p>Features</p>
@@ -121,7 +122,6 @@ const LandingPage = () => {
           <p>Student Blog</p>
           <p>Help Center</p>
         </div>
-      </div>
     </section>
     <hr/>
 
