@@ -24,7 +24,7 @@ const addExpense = async (token, expense) => {
 };
 
 const updateExpense = async (token, expense) => {
-  const res = await fetch(`${API_BASE}/api/expense/add`, {
+  const res = await fetch(`${API_BASE}/api/expense/update`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
