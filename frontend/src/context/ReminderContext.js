@@ -38,7 +38,7 @@ export const ReminderProvider = ({ children }) => {
     const token = await auth.currentUser.getIdToken();
     const newReminder = await updateReminder(token, reminder);
     setReminders((prev) => {
-      prev.map((item) =>
+      return prev.map((item) =>
         item.id === reminder.id ? { ...item, ...newReminder } : item,
       );
     });
