@@ -1,6 +1,5 @@
-import { Children, createContext, React, useEffect, useState } from "react";
+import { createContext, React, useContext, useEffect, useState } from "react";
 import { auth } from "../utils/firebase";
-import { addExpense } from "../Services/expenseService";
 import { onAuthStateChanged } from "firebase/auth";
 import {
   addreminder,
@@ -11,7 +10,7 @@ import {
 
 const ReminderContext = createContext();
 
-export const ReminderProvider = ({ Children }) => {
+export const ReminderProvider = ({ children }) => {
   const [reminders, setReminders] = useState([]);
 
   useEffect(() => {
@@ -53,7 +52,9 @@ export const ReminderProvider = ({ Children }) => {
 
   return (
     <ReminderContext.Provider value={{ reminders, create, update, deleteIt }}>
-      {Children}
+      {children}
     </ReminderContext.Provider>
   );
 };
+
+export const useReminders = () => useContext(ReminderContext);

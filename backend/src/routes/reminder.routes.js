@@ -6,7 +6,6 @@ const {
   updateReminder,
   deleteReminder,
 } = require("../services/reminder.service");
-const expenseRouter = require("./expense.routes");
 
 reminderRouter.get("/", async (req, res) => {
   try {
@@ -44,4 +43,4 @@ reminderRouter.post("/delete", async (req, res) => {
   }
 });
 
-module.exports = expenseRouter;
+module.exports = reminderRouter;
