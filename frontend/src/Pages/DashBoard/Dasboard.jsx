@@ -4,14 +4,6 @@ import styles from "./Dashboard.module.css";
 const DashBoard = () => {
   return (
     <div className={styles.dashboard}>
-      <header className={styles.header}>
-        <h1>UniWallet</h1>
-        <div>
-          <h2>Hey, Alex!</h2>
-          <p>Tuesday, April 24th</p>
-        </div>
-      </header>
-
       <div className={styles.cards}>
         <div className={styles.card}>
           <label>Total Expenses</label>
