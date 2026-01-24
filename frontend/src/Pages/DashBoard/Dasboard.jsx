@@ -4,6 +4,7 @@ import { useExpenses } from "../../context/ExpenseContext";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import { useReminders } from "../../context/ReminderContext";
+import { ExpensesBarchart, ExpensesPieChart } from "./Charts";
 
 const DashBoard = () => {
   const navigate = useNavigate();
@@ -72,12 +73,34 @@ const DashBoard = () => {
 
       <div className={styles.charts}>
         <div className={styles.chart}>
-          <h3>Spending This Month</h3>
-          <div className={styles.placeholder}>📈 Graph</div>
+          {expenses.length === 0 ? (
+            <>
+              <h3>Spending This Month</h3>
+              <div className={styles.placeholder}>
+                Your wallet is feeling a bit lonely.
+                <br /> Add your first expense to start tracking your wealth.
+              </div>
+            </>
+          ) : (
+            <div className={styles.container}>
+              <ExpensesBarchart expenses={expenses} />
+            </div>
+          )}
         </div>
         <div className={styles.chart}>
-          <h3>Category Breakdown</h3>
-          <div className={styles.placeholder}>🟠 Chart</div>
+          {expenses.length === 0 ? (
+            <>
+              <h3>Category Breakdown</h3>
+              <div className={styles.placeholder}>
+                Your wallet is feeling a bit lonely.
+                <br /> Add your first expense to start tracking your wealth.
+              </div>
+            </>
+          ) : (
+            <div className={styles.container}>
+              <ExpensesPieChart expenses={expenses} />
+            </div>
+          )}
         </div>
       </div>
 

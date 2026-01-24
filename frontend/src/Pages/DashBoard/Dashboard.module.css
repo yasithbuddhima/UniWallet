@@ -72,6 +72,10 @@
   margin-bottom: 32px;
 }
 
+.charts .container {
+  height: 400px;
+}
+
 .chart {
   background-color: #1f2933;
   padding: 20px;
@@ -92,6 +96,7 @@
   border-radius: 8px;
   color: #9ca3af;
   font-size: 18px;
+  text-align: center;
 }
 
 .transactions {
