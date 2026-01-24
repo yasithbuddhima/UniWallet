@@ -17,7 +17,7 @@ const ProfilePage = () => {
     if (window.confirm("Are you sure you want to sign out?")) {
       try {
         await signOut(auth);
-        navigate("/auth");
+        navigate("/login");
       } catch (error) {
         console.error("Sign out error:", error);
         alert("Error signing out: " + error.message);
@@ -40,7 +40,7 @@ const ProfilePage = () => {
           const currentUser = auth.currentUser;
           if (currentUser) {
             await deleteUser(currentUser);
-            navigate("/auth");
+            navigate("/login");
           }
         } catch (error) {
           console.error("Delete account error:", error);

@@ -6,6 +6,7 @@ import ExpensePage from "../Pages/Expenses/ExpensesPage";
 import RemindersPage from "../Pages/Reminders/RemindersPage";
 import ProfilePage from "../Pages/Profile/ProfilePage";
 import Authpage from "../Pages/Auth/AuthPage";
+import { requireAuth } from "../utils/auth";
 
 const router = createBrowserRouter([
   {
@@ -18,17 +19,16 @@ const router = createBrowserRouter([
     element: <LandingPage />,
   },
   {
-    // TODO: Pass this parameter to the auth page correctly
-    //  login , signup
-    path: "/auth/:mode",
+    path: "/login",
     element: <Authpage />,
-    // TODO: Implement a loader to prevent logged in users to access here
-    // loader: null,
+  },
+  {
+    path: "/signup",
+    element: <Authpage />,
   },
   {
     element: <RootLayout />,
-    // TODO: Implement requireAuth function to validate user
-    // loader: null,
+    loader: requireAuth,
     children: [
       {
         path: "/dashboard",

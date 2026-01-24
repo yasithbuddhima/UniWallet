@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import styles from "./AuthPage.module.css";
 import signInImg from "../../assets/signin.png";
@@ -8,11 +8,20 @@ import {
   loginWithGoogle,
   signUpWithEmail,
 } from "../../Services/authService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Authpage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/signup") {
+      setIsLogin(false);
+    } else if (location.pathname === "/login") {
+      setIsLogin(true);
+    }
+  }, [location.pathname]);
 
   const handleEmailSignUp = async (e) => {
     e.preventDefault();
