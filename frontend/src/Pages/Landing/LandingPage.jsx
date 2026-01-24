@@ -9,8 +9,10 @@ import trustimage4 from "./trustimage4.png";
 import trustimage5 from "./trustimage5.png";
 import trustimage6 from "./trustimage6.png";
 import hero from "./hero.png";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className={style.body}>
@@ -20,8 +22,12 @@ const LandingPage = () => {
             uniwallet
           </h2>
           <div className={style.button}>
-            <button className={style.login}>Login</button>
-            <button className={style.btn}>Create New Account</button>
+            <button className={style.login} onClick={() => navigate("/login")}>
+              Login
+            </button>
+            <button className={style.btn} onClick={() => navigate("/signup")}>
+              Create New Account
+            </button>
           </div>
         </section>
 
@@ -32,7 +38,12 @@ const LandingPage = () => {
               <br /> Stop Stressing.
             </h1>
             <p>Track expenses, save smartly and manage money easily.</p>
-            <button className={style.btngreen}>Get Started Now</button>
+            <button
+              className={style.btngreen}
+              onClick={() => navigate("/signup")}
+            >
+              Get Started Now
+            </button>
           </div>
           <div className={style.heroimage}>
             <img src={hero} alt="phone" />
@@ -98,7 +109,7 @@ const LandingPage = () => {
         <section className={style.cta}>
           <h1>Ready to take control of your finances?</h1>
           <p>Join thousands of students making smarter money moves today.</p>
-          <button className={style.btn2}>
+          <button className={style.btn2} onClick={() => navigate("/signup")}>
             Create Your Free Uniwallet Account
           </button>
         </section>
