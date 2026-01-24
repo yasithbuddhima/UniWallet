@@ -97,7 +97,7 @@
 
 .gridRow {
   display: grid;
-  grid-template-columns: 100px 1fr 150px 120px;
+  grid-template-columns: 100px 1fr 150px 120px 100px;
   padding: 16px 24px;
   align-items: center;
 }
@@ -196,4 +196,31 @@
 
 .btnLoadMore:hover {
   background-color: rgba(132, 204, 22, 0.1);
+}
+
+.colAction {
+  display: flex;
+  justify-content: center;
+}
+
+.deleteBtn {
+  background-color: #ff6b6b;
+  color: #1f2933;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  width: fit-content;
+}
+
+.deleteBtn:hover {
+  background-color: #ff5252;
+  transform: scale(1.05);
+}
+
+.deleteBtn:active {
+  transform: scale(0.98);
 }

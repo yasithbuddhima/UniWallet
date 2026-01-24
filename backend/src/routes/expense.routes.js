@@ -43,7 +43,7 @@ expenseRouter.post("/delete", async (req, res) => {
     const success = await deleteExpense(req.user.uid, req.body);
     res.status(201).json(success);
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: error.message });
   }
 });
 

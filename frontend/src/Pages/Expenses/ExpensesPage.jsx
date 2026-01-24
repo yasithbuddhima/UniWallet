@@ -4,7 +4,7 @@ import AddExpenseComponent from "../../Components/AddExpense/AddExpense";
 import { useExpenses } from "../../context/ExpenseContext";
 
 const ExpensePage = () => {
-  const { expenses, create } = useExpenses();
+  const { expenses, create, deleteIt } = useExpenses();
   const [expensesCount, setExpensesCount] = useState(5);
 
   const [isAddExpense, setISAddExpense] = useState(false);
@@ -22,6 +22,10 @@ const ExpensePage = () => {
     create(expense);
     // TODO: Implement a toast
     //?
+  };
+
+  const handleDeleteExpense = (expenseId) => {
+    deleteIt(expenseId);
   };
 
   const loadMore = () => {
@@ -78,6 +82,7 @@ const ExpensePage = () => {
               <div className={styles.colName}>Name</div>
               <div className={styles.colCategory}>CATEGORY</div>
               <div className={styles.colAmount}>AMOUNT</div>
+              <div className={styles.colAction}>ACTION</div>
             </div>
 
             {/* Rows */}
@@ -109,6 +114,16 @@ const ExpensePage = () => {
                     {/* Amount */}
                     <div className={styles.colAmount}>
                       - Rs. {Number(tx.amount).toLocaleString()}
+                    </div>
+
+                    {/* Delete Button */}
+                    <div className={styles.colAction}>
+                      <button
+                        className={styles.deleteBtn}
+                        onClick={() => handleDeleteExpense(tx.id)}
+                      >
+                        &#128465;
+                      </button>
                     </div>
                   </div>
                 ))
