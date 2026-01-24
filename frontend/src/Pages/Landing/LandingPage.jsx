@@ -79,13 +79,13 @@ const LandingPage = () => {
             </p>
           </div>
           <div className={style.financialimage1}>
-            <img src={financialimage1} />
+            <img src={financialimage1} alt="Save for goals" />
           </div>
         </section>
 
         <section className={style.financial2}>
           <div className={style.financialimage2}>
-            <img src={financialimage2} />
+            <img src={financialimage2} alt="Financial health tracking" />
           </div>
           <div className={style.financialtext2}>
             <h3>Ditch the spreadsheet anxiety.</h3>

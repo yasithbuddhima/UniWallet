@@ -1,19 +1,23 @@
 .body {
   background-color: #121212;
-  border-radius: 30px;
+  padding-top: 10px;
 }
 
 .navbar {
   background-color: #1f2933;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 50px;
   border-radius: 50px;
   height: 30px;
+  margin-top: 20px;
 }
 
 .button {
-  justify-content: space-between;
+  justify-content: center;
+  display: flex;
+  gap: 10px;
 }
 
 .logo {
@@ -32,6 +36,7 @@
   border: none;
   color: #84cc16;
   padding-right: 15px;
+  width: fit-content;
 }
 
 .btn {
@@ -42,6 +47,7 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  width: fit-content;
 }
 
 .btngreen {
@@ -51,6 +57,7 @@
   cursor: pointer;
   font-weight: bold;
   color: #121212;
+  width: fit-content;
 }
 
 .btng2 {
@@ -58,6 +65,7 @@
   color: #2dd4bf;
   border: none;
   margin-left: 20px;
+  width: fit-content;
 }
 
 .hero {
@@ -158,6 +166,7 @@
   color: #132f27;
   font-weight: bold;
   border-radius: 50px;
+  width: fit-content;
 }
 
 .financial1 {
