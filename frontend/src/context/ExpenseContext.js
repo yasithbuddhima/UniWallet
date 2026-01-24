@@ -51,8 +51,24 @@ export const ExpenseProvider = ({ children }) => {
     setExpenses((prev) => prev.filter((item) => item.id !== expenseId));
   };
 
+  const getTotalExpenseInMonth = () => {
+    let total = 0;
+    const currentMonth = new Date().getMonth();
+
+    expenses.forEach((e) => {
+      const expenseDate = new Date(e.date);
+      if (currentMonth === expenseDate.getMonth()) {
+        total += Number(e.amount);
+      }
+    });
+
+    return total;
+  };
+
   return (
-    <ExpenseContext.Provider value={{ expenses, create, update, deleteIt }}>
+    <ExpenseContext.Provider
+      value={{ expenses, create, update, deleteIt, getTotalExpenseInMonth }}
+    >
       {children}
     </ExpenseContext.Provider>
   );

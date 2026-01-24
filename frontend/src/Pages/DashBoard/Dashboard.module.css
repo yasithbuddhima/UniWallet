@@ -111,10 +111,11 @@
   margin: 0;
 }
 
-.txHeader a {
+.txHeader span {
   color: #84cc16;
   text-decoration: none;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .txList {
@@ -146,4 +147,26 @@
 
 .tx > div > span {
   font-weight: bold;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: #9ca3af;
+}
+
+.emptyState p {
+  color: #f1f5f9;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.emptyState span {
+  font-size: 0.9rem;
+  color: #9ca3af;
 }
