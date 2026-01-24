@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { logEvent } from "firebase/analytics";
 import { analytics, auth } from "../utils/firebase";
@@ -12,12 +13,12 @@ import { analytics, auth } from "../utils/firebase";
 const API_BASE = process.env.REACT_APP_BACKEND_API_BASE;
 
 // Function to Sign Up with Email And Password
-export async function signUpWithEmail(email, password) {
+export async function signUpWithEmail(email, password, name) {
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
-      password
+      password,
     );
 
     const user = await userCredential.user;
@@ -32,6 +33,9 @@ export async function signUpWithEmail(email, password) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
 
+    await updateProfile(auth.currentUser, {
+      displayName: name,
+    });
     localStorage.setItem("token", idToken);
     logEvent(analytics, "signUp", { method: "Email+Password" });
     return { success: true };
@@ -46,7 +50,7 @@ export async function logInWithEmail(email, password) {
     const userCredential = await signInWithEmailAndPassword(
       auth,
       email,
-      password
+      password,
     );
 
     const user = userCredential.user;

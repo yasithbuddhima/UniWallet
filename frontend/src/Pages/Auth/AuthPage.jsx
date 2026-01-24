@@ -19,32 +19,29 @@ const Authpage = () => {
 
     const _email = e.target.mail.value;
     const _pwd = e.target.pwd.value;
+    const _name = e.target.name.value;
 
-    const result = await signUpWithEmail(_email, _pwd);
+    const result = await signUpWithEmail(_email, _pwd, _name);
 
     if (result.success) {
-      // TODO: Remove this Line
       console.log("Signed In Successfully");
-      // Redirect to Dashboard
       navigate("/dashboard");
     } else {
+      let errorMessage = "Authentication failed";
       switch (result.error.code) {
         case "auth/email-already-in-use":
-          // TODO: Redirect to Log IN
-          return null;
-
+          errorMessage = "Email is already registered. Please log in instead.";
+          break;
         case "auth/invalid-email":
-          // TODO: Show Error Message on UI
-          return { error: "Invalid email address" };
-
+          errorMessage = "Invalid email address";
+          break;
         case "auth/weak-password":
-          // TODO: Show Error Message on UI
-          return { error: "Password must be at least 6 characters" };
-
+          errorMessage = "Password must be at least 6 characters";
+          break;
         default:
-          // TODO: Show Error Message on UI
-          return { error: "Authentication failed" };
+          errorMessage = result.error.message || "Authentication failed";
       }
+      alert(errorMessage);
     }
   };
 
@@ -56,60 +53,56 @@ const Authpage = () => {
 
     const result = await logInWithEmail(_email, _pwd);
     if (result.success) {
-      // TODO: Remove this Line
       console.log("Login Successfully");
-      // Redirect to Dashboard
       navigate("/dashboard");
     } else {
+      let errorMessage = "Authentication failed";
       switch (result.error.code) {
         case "auth/user-not-found":
-          // TODO: Redirect user to Sign up
-          return null;
+          errorMessage = "Email not found. Please sign up first.";
+          break;
         case "auth/wrong-password":
-          // TODO: Show Error Message on UI
-          return null;
-
+          errorMessage = "Incorrect password";
+          break;
         case "auth/invalid-email":
-          // TODO: Show Error Message on UI
-          return { error: "Invalid email address" };
-
+          errorMessage = "Invalid email address";
+          break;
         default:
-          // TODO: Show Error Message on UI
-          return { error: "Authentication failed" };
+          errorMessage = result.error.message || "Authentication failed";
       }
+      alert(errorMessage);
     }
   };
 
   const handleGoogleLogin = async () => {
     const result = await loginWithGoogle();
     if (result.success) {
-      // TODO: Remove this Line
       console.log("Login with Google Successfully");
-      // Redirect to Dashboard
       navigate("/dashboard");
     } else {
+      let errorMessage = "Authentication failed";
       switch (result.error.code) {
         case "auth/popup-blocked":
-          // TODO: Show Error Message on UI
-          return null;
-
+          errorMessage =
+            "Pop-up was blocked. Please allow pop-ups and try again.";
+          break;
         case "auth/popup-closed-by-user":
-          // TODO: Show Error Message on UI
-          return null;
+          errorMessage = "Sign-in was cancelled";
+          break;
         case "auth/account-exists-with-different-credential":
-          // TODO: Show Error Message on UI
-          return null;
+          errorMessage =
+            "This email is already registered with a different method";
+          break;
         case "auth/cancelled-popup-request":
-          // TODO: Show Error Message on UI
-          return null;
+          errorMessage = "Sign-in was cancelled";
+          break;
         case "auth/network-request-failed":
-          // TODO: Show Error Message on UI
-          return null;
-
+          errorMessage = "Network error. Please check your connection.";
+          break;
         default:
-          // TODO: Show Error Message on UI
-          return { error: "Authentication failed" };
+          errorMessage = result.error.message || "Authentication failed";
       }
+      alert(errorMessage);
     }
   };
   return (
@@ -125,7 +118,10 @@ const Authpage = () => {
               transition={{ duration: 0.3 }}
             >
               <div className={`${styles.authcontainer} ${styles.login}`}>
-                <LoginForm />
+                <LoginForm
+                  handleGoogle={handleGoogleLogin}
+                  onSubmit={handleEmailSignIn}
+                />
                 <LogInBanner onChange={setIsLogin} />
               </div>
             </motion.div>
@@ -139,7 +135,10 @@ const Authpage = () => {
             >
               <div className={`${styles.authcontainer} ${styles.signin}`}>
                 <SignInBanner onChange={setIsLogin} />
-                <SignInForm />
+                <SignInForm
+                  handleGoogle={handleGoogleLogin}
+                  onSubmit={handleEmailSignUp}
+                />
               </div>
             </motion.div>
           )}
@@ -156,9 +155,19 @@ const SignInForm = ({ onSubmit, handleGoogle }) => {
         <form className={styles.formsignupform} onSubmit={onSubmit}>
           <h2>Create Account.</h2>
           <p>Start your journey to financial freedom.</p>
-          <input type="text" placeholder="Full Name" />
-          <input type="email" placeholder="Email Address" />
-          <input type="password" placeholder="Create Password" />
+          <input type="text" name="name" placeholder="Full Name" required />
+          <input
+            type="email"
+            name="mail"
+            placeholder="Email Address"
+            required
+          />
+          <input
+            type="password"
+            name="pwd"
+            placeholder="Create Password"
+            required
+          />
           <button>Get Started</button>
           <div className={styles.divider}>Or</div>
           <button
@@ -194,8 +203,8 @@ const LoginForm = ({ onSubmit, handleGoogle }) => {
         <form className={styles.formloginform} onSubmit={onSubmit}>
           <h2>Welcome Back, Scholar.</h2>
           <p>Sign in to track today’s spend.</p>
-          <input type="email" placeholder="Email Address" />
-          <input type="password" placeholder="Password" />
+          <input type="email" name="mail" placeholder="Email Address" />
+          <input type="password" name="pwd" placeholder="Password" />
           <button type="submit">Log In</button>
           <div className={styles.divider}>Or</div>
           <button
