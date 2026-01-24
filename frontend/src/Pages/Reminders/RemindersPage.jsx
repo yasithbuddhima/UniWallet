@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./RemindersPage.module.css";
-import AddReminder from "../../Components/AddReminder";
+import AddReminder from "../../Components/AddReminder/AddReminder";
 import { useReminders } from "../../context/ReminderContext";
 
 const RemindersPage = () => {
@@ -36,46 +36,51 @@ const RemindersPage = () => {
           />
 
           <div className={styles.timeline}>
-            <div className={styles.timeLabel}>THIS WEEK</div>
-            {reminders.length === 0
-              ? null
-              : reminders.map((item) => (
-                  <div key={item.id} className={styles.cardWrapper}>
-                    <div className={styles.timelineDot} />
+            <div className={styles.timeLabel}>ALL REMINDERS</div>
+            {reminders.length === 0 ? (
+              <div className={styles.emptyState}>
+                <p>No reminders yet</p>
+                <span>Create a new reminder to track your upcoming bills.</span>
+              </div>
+            ) : (
+              reminders.map((item) => (
+                <div key={item.id} className={styles.cardWrapper}>
+                  <div className={styles.timelineDot} />
 
-                    <div className={`${styles.card} ${styles[item.status]}`}>
-                      <div className={styles.cardContent}>
-                        <div className={styles.icon}>{item.icon}</div>
+                  <div className={`${styles.card} ${styles[item.status]}`}>
+                    <div className={styles.cardContent}>
+                      <div className={styles.icon}>{item.icon}</div>
 
-                        <div className={styles.details}>
-                          <span className={styles.merchant}>
-                            {item.merchant}
-                            {item.status === "overdue" && (
-                              <span className={styles.overdueTag}>OVERDUE</span>
-                            )}
-                          </span>
-                          <span className={styles.subtext}>{item.due}</span>
-                        </div>
-
-                        <div className={styles.priceAction}>
-                          {item.status !== "paid" ? (
-                            <>
-                              <span className={styles.amount}>{item.cost}</span>
-                              <button
-                                className={styles.payBtn}
-                                onClick={() => markAsPaid(item)}
-                              >
-                                Mark Paid ✓
-                              </button>
-                            </>
-                          ) : (
-                            <span className={styles.amount}>{item.cost}</span>
+                      <div className={styles.details}>
+                        <span className={styles.name}>
+                          {item.name}
+                          {item.status === "overdue" && (
+                            <span className={styles.overdueTag}>OVERDUE</span>
                           )}
-                        </div>
+                        </span>
+                        <span className={styles.subtext}>{item.dueDate}</span>
+                      </div>
+
+                      <div className={styles.priceAction}>
+                        {item.status !== "paid" ? (
+                          <>
+                            <span className={styles.amount}>{item.cost}</span>
+                            <button
+                              className={styles.payBtn}
+                              onClick={() => markAsPaid(item)}
+                            >
+                              Mark Paid ✓
+                            </button>
+                          </>
+                        ) : (
+                          <span className={styles.amount}>{item.cost}</span>
+                        )}
                       </div>
                     </div>
                   </div>
-                ))}
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

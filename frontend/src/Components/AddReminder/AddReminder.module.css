@@ -2,7 +2,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  /* transform: translate(-50%, -50%); */
   z-index: 10;
   backdrop-filter: blur(4px);
   display: flex;
@@ -66,9 +65,9 @@
 
 /* Icon Picker */
 .iconGrid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
-  flex-wrap: wrap;
 }
 
 .iconBtn {
@@ -90,12 +89,13 @@
   background-color: #84cc16; /* Sage Green */
   color: white;
   border: none;
-  padding: 14px;
+  padding: 14px 28px;
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
   margin-top: 10px;
   transition: opacity 0.2s;
+  width: auto;
 }
 
 .submitBtn:hover {
