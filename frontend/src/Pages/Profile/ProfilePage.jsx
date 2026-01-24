@@ -1,15 +1,54 @@
 import React, { useState } from "react";
 import styles from "./ProfilePage.module.css";
 import { useUser } from "../../context/UserContext";
+import { motion, AnimatePresence } from "motion/react";
+import { auth } from "../../utils/firebase";
+import { signOut, deleteUser } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
   const [reminders, setReminders] = useState(false);
   const [emailSummary, setEmailSummary] = useState(true);
+  const [expandedPersonal, setExpandedPersonal] = useState(false);
   const { user } = useUser();
+  const navigate = useNavigate();
 
-  const handleNav = (link) => alert("Navigating to: " + link);
-  const handleLogout = () => alert("Are you sure?") && alert("Logged out!");
-  const handleDelete = () => alert("Delete all data?") && alert("Deleted.");
+  const handleLogout = async () => {
+    if (window.confirm("Are you sure you want to sign out?")) {
+      try {
+        await signOut(auth);
+        navigate("/auth");
+      } catch (error) {
+        console.error("Sign out error:", error);
+        alert("Error signing out: " + error.message);
+      }
+    }
+  };
+
+  const handleDelete = async () => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone.",
+      )
+    ) {
+      if (
+        window.confirm(
+          "This will permanently delete all your data. Type your email to confirm.",
+        )
+      ) {
+        try {
+          const currentUser = auth.currentUser;
+          if (currentUser) {
+            await deleteUser(currentUser);
+            navigate("/auth");
+          }
+        } catch (error) {
+          console.error("Delete account error:", error);
+          alert("Error deleting account: " + error.message);
+        }
+      }
+    }
+  };
 
   return (
     <div className={styles.bodyWrapper}>
@@ -27,25 +66,44 @@ const ProfilePage = () => {
             You spend 35% of your budget on coffee. That's $45 more than
             average!
           </p>
-          <button
-            className={styles.btnPrimary}
-            onClick={() => alert("Challenge started!")}
-          >
-            Start Challenge
-          </button>
+          <button className={styles.btnPrimary}>Start Challenge</button>
         </div>
-
         <div className={styles.groupLabel}>GENERAL</div>
         <div className={`${styles.card} ${styles.listWrapper}`}>
-          <div className={styles.listRow} onClick={() => handleNav("profile")}>
+          <div
+            className={styles.listRow}
+            onClick={() => setExpandedPersonal(!expandedPersonal)}
+          >
             <div className={styles.rowContent}>
               <span className={styles.rowIcon}>👤</span>
               <span className={styles.rowTitle}>Personal Details</span>
             </div>
             <div className={styles.nextArrow}>›</div>
           </div>
+          <AnimatePresence>
+            {expandedPersonal && (
+              <motion.div
+                className={styles.expandedDiv}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <p>
+                  <strong>Email:</strong> {user?.email || "N/A"}
+                </p>
+                <p>
+                  <strong>Created:</strong>{" "}
+                  {user?.metadata?.creationTime || "N/A"}
+                </p>
+                <p>
+                  <strong>Last Sign In:</strong>{" "}
+                  {user?.metadata?.lastSignInTime || "N/A"}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-
         <div className={styles.groupLabel}>SETTINGS</div>
         <div className={`${styles.card} ${styles.listWrapper}`}>
           <div
@@ -82,7 +140,6 @@ const ProfilePage = () => {
             </button>
           </div>
         </div>
-
         <div className={`${styles.groupLabel} ${styles.dangerText}`}>
           DANGER ZONE
         </div>

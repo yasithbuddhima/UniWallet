@@ -84,6 +84,13 @@
   font-size: 18px;
 }
 
+.expandedDiv {
+  padding: 16px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+  overflow: hidden;
+}
+
 /* Toggle Switch Logic */
 .toggleSwitch {
   width: 44px;
