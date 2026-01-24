@@ -9,7 +9,7 @@ import { ExpensesBarchart, ExpensesPieChart } from "./Charts";
 const DashBoard = () => {
   const navigate = useNavigate();
 
-  const { reminders, getNextReminder } = useReminders();
+  const { getNextReminder } = useReminders();
   const nextReminder = getNextReminder();
   const nextReminderDate = getRelativeDate(nextReminder?.dueDate);
 
@@ -68,6 +68,15 @@ const DashBoard = () => {
           >
             Due {nextReminderDate} - Rs. {nextReminder?.value}
           </p>
+        </div>
+
+        <div className={styles.card + " " + styles.addExpenseCard}>
+          <button
+            className={styles.addExpenseBtn}
+            onClick={() => navigate("/expenses")}
+          >
+            + Add Expense
+          </button>
         </div>
       </div>
 
@@ -157,8 +166,6 @@ const getRelativeDate = (dateString) => {
 
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
-
-  const diffTime = targetDate.getTime() - today.getTime();
 
   if (targetDate.getTime() === today.getTime()) {
     return "Today";
