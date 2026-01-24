@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2c5364;
+  background-color: #1f2933;
   font-family: Arial, sans-serif;
   padding: 20px;
 }
@@ -18,7 +18,7 @@
   height: auto;
   margin: 0;
   padding: 0;
-  background-color: #2c5364;
+  background-color: #1f2933;
 }
 
 .formslayer {
@@ -27,8 +27,16 @@
   justify-content: center;
   align-items: center;
   padding: 40px;
-  border-radius: 5px 0 0 5px;
+
   background-color: #1c1c1c;
+}
+
+.login .formslayer {
+  border-radius: 10px 0 0 10px;
+}
+
+.signin .formslayer {
+  border-radius: 0 10px 10px 0;
 }
 
 .formsignupform,
@@ -51,7 +59,7 @@
 }
 
 .formloginform input,
-.formsignupform input{
+.formsignupform input {
   border-radius: 5px;
 }
 
@@ -117,7 +125,14 @@ button:hover {
   color: #fff;
   padding: 40px;
   text-align: center;
-  border-radius: 0  8px 8px 0;
+}
+
+.login .overlaypanel {
+  border-radius: 0 10px 10px 0;
+}
+
+.signin .overlaypanel {
+  border-radius: 10px 0 0 10px;
 }
 
 .overlaypanel h2 {
@@ -138,6 +153,9 @@ button:hover {
 
 .overlaypanel button:hover {
   background-color: #f0f0f0;
- 
 }
 
+.overlaypanel img {
+  max-width: 100%;
+  max-height: 100%;
+}
