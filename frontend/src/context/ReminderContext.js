@@ -22,7 +22,24 @@ export const ReminderProvider = ({ children }) => {
 
       const token = await user.getIdToken();
       const data = await getAllReminders(token);
-      setReminders(data);
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const processedData = data.map((reminder) => {
+        const dueDate = new Date(reminder.dueDate);
+        let status = "upcoming";
+
+        if (reminder.paidOn) {
+          status = "paid";
+        } else if (dueDate < today) {
+          status = "overdue";
+        }
+
+        return { ...reminder, status };
+      });
+
+      setReminders(processedData);
     });
 
     return () => unsub();
@@ -50,8 +67,23 @@ export const ReminderProvider = ({ children }) => {
     setReminders((prev) => prev.filter((item) => item.id !== reminderId));
   };
 
+  const getNextReminder = () => {
+    const activeReminders = reminders
+      .filter((r) => {
+        if (r.paidOn) return false;
+        return true;
+      })
+      .sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
+
+    return activeReminders[0];
+  };
+
   return (
-    <ReminderContext.Provider value={{ reminders, create, update, deleteIt }}>
+    <ReminderContext.Provider
+      value={{ reminders, create, update, deleteIt, getNextReminder }}
+    >
       {children}
     </ReminderContext.Provider>
   );

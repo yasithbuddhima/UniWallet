@@ -3,9 +3,14 @@ import styles from "./Dashboard.module.css";
 import { useExpenses } from "../../context/ExpenseContext";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import { useReminders } from "../../context/ReminderContext";
 
 const DashBoard = () => {
   const navigate = useNavigate();
+
+  const { reminders, getNextReminder } = useReminders();
+  const nextReminder = getNextReminder();
+  const nextReminderDate = getRelativeDate(nextReminder?.dueDate);
 
   const { expenses, getTotalExpenseInMonth } = useExpenses();
   const displayedExpenses = expenses.slice(0, 5);
@@ -15,6 +20,7 @@ const DashBoard = () => {
   const budget = 20000;
 
   const percentage = Math.min((totalExpense / budget) * 100, 100);
+
   return (
     <div className={styles.dashboard}>
       <div className={styles.cards}>
@@ -50,9 +56,17 @@ const DashBoard = () => {
         </div>
 
         <div className={styles.card}>
-          <label>Next Expense</label>
-          <h3>Spotify</h3>
-          <p className={styles.warning}>Due Tomorrow - $10.99</p>
+          <label>Next Reminder</label>
+          <h3> {nextReminder?.name}</h3>
+          <p
+            className={
+              nextReminder?.status === "overdue"
+                ? styles.negative
+                : styles.warning
+            }
+          >
+            Due {nextReminderDate} - Rs. {nextReminder?.value}
+          </p>
         </div>
       </div>
 
@@ -104,6 +118,37 @@ const DashBoard = () => {
       </div>
     </div>
   );
+};
+
+const getRelativeDate = (dateString) => {
+  if (!dateString) return "";
+
+  const targetDate = new Date(dateString);
+  targetDate.setHours(0, 0, 0, 0);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+
+  const diffTime = targetDate.getTime() - today.getTime();
+
+  if (targetDate.getTime() === today.getTime()) {
+    return "Today";
+  } else if (targetDate.getTime() === yesterday.getTime()) {
+    return "Yesterday";
+  } else if (targetDate.getTime() === tomorrow.getTime()) {
+    return "Tomorrow";
+  } else {
+    return targetDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+  }
 };
 
 export default DashBoard;

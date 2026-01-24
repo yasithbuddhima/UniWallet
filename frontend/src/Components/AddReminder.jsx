@@ -7,7 +7,7 @@ const AddReminder = ({ isOpen, onClose, onComplete }) => {
   const [formData, setFormData] = useState({
     name: "",
     value: "",
-    due: "",
+    dueDate: "",
     icon: "🎵",
   });
 
