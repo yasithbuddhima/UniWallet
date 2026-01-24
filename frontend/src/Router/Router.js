@@ -20,15 +20,15 @@ const router = createBrowserRouter([
   {
     // TODO: Pass this parameter to the auth page correctly
     //  login , signup
-    path: "auth/:mode",
+    path: "/auth/:mode",
     element: <Authpage />,
     // TODO: Implement a loader to prevent logged in users to access here
-    loader: null,
+    // loader: null,
   },
   {
     element: <RootLayout />,
     // TODO: Implement requireAuth function to validate user
-    loader: null,
+    // loader: null,
     children: [
       {
         path: "/dashboard",

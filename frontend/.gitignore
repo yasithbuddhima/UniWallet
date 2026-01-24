@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore the actual environment file with sensitive data
+.env
+
+# Do not ignore the example environment file which documents necessary variables
+!.env.example

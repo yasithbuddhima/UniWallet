@@ -1,7 +1,102 @@
-import React from "react";
+import React, { useState } from "react";
+import styles from "./ExpensesPage.module.css";
+import AddExpenseComponent from "../../Components/AddExpense/AddExpense";
 
 const ExpensePage = () => {
-  return <></>;
+  const [expenses, setExpenses] = useState([]);
+  const [isAddExpense, setISAddExpense] = useState(false);
+
+  // TODO: Add function to handle new expense
+  const handleNewExpense = async (expense) => {
+    return null;
+  };
+  return (
+    <>
+      <div className={styles.container}>
+        <main className={styles.mainContent}>
+          <header className={styles.pageHeader}>
+            <div className={styles.headerTop}>
+              <h2>Expense History</h2>
+              <button
+                className={styles.addBtn}
+                // TODO:  method to add expenses
+                onClick={() => setISAddExpense(!isAddExpense)}
+              >
+                Add Expense
+              </button>
+            </div>
+
+            <AddExpenseComponent
+              isOpen={isAddExpense}
+              onClose={() => setISAddExpense(false)}
+              onAdd={handleNewExpense}
+            />
+
+            <div className={styles.filterRow}>
+              <select className={styles.filterSelect}>
+                <option>This Month</option>
+                <option>Last Month</option>
+                <option>All Time</option>
+              </select>
+              <select className={styles.filterSelect}>
+                <option>All Categories</option>
+                <option>Food</option>
+                <option>Education</option>
+                <option>Transport</option>
+              </select>
+            </div>
+          </header>
+
+          <section className={styles.dataContainer}>
+            <div className={`${styles.tableHeader} , ${styles.gridRow}`}>
+              <div className={styles.colDate}>DATE</div>
+              <div className={styles.colName}>Name</div>
+              <div className={styles.colCategory}>CATEGORY</div>
+              <div className={styles.colAmount}>AMOUNT</div>
+            </div>
+
+            {/* Rows */}
+            <div className={styles.expenseList}>
+              {expenses.length === 0 ? (
+                <div className={styles.emptyState}>
+                  <p>No expenses found</p>
+                  <span>
+                    Add a new expense to start tracking your spending.
+                  </span>
+                </div>
+              ) : (
+                expenses.map((tx) => (
+                  <div
+                    key={tx.id}
+                    className={`${styles.expenseRow} , ${styles.gridRow}`}
+                  >
+                    {/* Date */}
+                    <div className={styles.colDate}>{tx.date}</div>
+
+                    {/* Name */}
+                    <div className={styles.colName}>{tx.Name}</div>
+
+                    {/* Category Chip */}
+                    <div className={styles.colCategory}>
+                      <span className={styles.chip}>{tx.category}</span>
+                    </div>
+
+                    {/* Amount */}
+                    <div className={styles.colAmount}>-${tx.amount}</div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            <div className={styles.loadMoreContainer}>
+              {/* //TODO: Add load more function */}
+              <button className={styles.btnLoadMore}>Load More expenses</button>
+            </div>
+          </section>
+        </main>
+      </div>
+    </>
+  );
 };
 
 export default ExpensePage;
