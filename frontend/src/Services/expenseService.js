@@ -43,7 +43,7 @@ const deleteExpense = async (token, expenseId) => {
       "content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(expenseId),
+    body: JSON.stringify({ id: expenseId }),
   });
 
   return res.json();

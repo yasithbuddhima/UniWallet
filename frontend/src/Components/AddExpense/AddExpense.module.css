@@ -40,6 +40,8 @@
   color: #9ca3af;
   font-size: 24px;
   cursor: pointer;
+  width: auto;
+  padding: 10px 50px;
 }
 
 .componentForm {
@@ -97,14 +99,14 @@
 }
 
 .btnSubmit {
-  flex: 2;
   background-color: #84cc16;
   color: #121212;
   border: none;
-  padding: 12px;
+  padding: 12px 28px;
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
+  width: fit-content;
 }
 
 .btnSubmit:hover {

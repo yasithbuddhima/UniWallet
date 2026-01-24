@@ -4,17 +4,28 @@ import AddExpenseComponent from "../../Components/AddExpense/AddExpense";
 import { useExpenses } from "../../context/ExpenseContext";
 
 const ExpensePage = () => {
-  const { expenses, create } = useExpenses();
+  const { expenses, create, deleteIt } = useExpenses();
   const [expensesCount, setExpensesCount] = useState(5);
 
   const [isAddExpense, setISAddExpense] = useState(false);
+  const [timeFilter, setTimeFilter] = useState("All Time");
+  const [categoryFilter, setCategoryFilter] = useState("All Categories");
 
-  const displayedExpenses = expenses.slice(0, expensesCount);
+  const categorizedItems = getFilteredData(
+    expenses,
+    categoryFilter,
+    timeFilter,
+  );
+  const displayedExpenses = categorizedItems.slice(0, expensesCount);
 
   const handleNewExpense = async (expense) => {
     create(expense);
     // TODO: Implement a toast
     //?
+  };
+
+  const handleDeleteExpense = (expenseId) => {
+    deleteIt(expenseId);
   };
 
   const loadMore = () => {
@@ -42,16 +53,25 @@ const ExpensePage = () => {
             />
 
             <div className={styles.filterRow}>
-              <select className={styles.filterSelect}>
-                <option>This Month</option>
-                <option>Last Month</option>
-                <option>All Time</option>
+              <select
+                className={styles.filterSelect}
+                value={timeFilter}
+                onChange={(e) => setTimeFilter(e.target.value)}
+              >
+                <option value="All Time">All Time</option>
+                <option value="This Month">This Month</option>
+                <option value="Last Month">Last Month</option>
               </select>
-              <select className={styles.filterSelect}>
-                <option>All Categories</option>
-                <option>Food</option>
-                <option>Education</option>
-                <option>Transport</option>
+              <select
+                className={styles.filterSelect}
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+              >
+                <option value="All Categories">All Categories</option>
+                <option value="Food">Food</option>
+                <option value="Education">Education</option>
+                <option value="Transport">Transport</option>
+                <option value="Entertainment">Entertainment</option>
               </select>
             </div>
           </header>
@@ -62,6 +82,7 @@ const ExpensePage = () => {
               <div className={styles.colName}>Name</div>
               <div className={styles.colCategory}>CATEGORY</div>
               <div className={styles.colAmount}>AMOUNT</div>
+              <div className={styles.colAction}>ACTION</div>
             </div>
 
             {/* Rows */}
@@ -94,6 +115,16 @@ const ExpensePage = () => {
                     <div className={styles.colAmount}>
                       - Rs. {Number(tx.amount).toLocaleString()}
                     </div>
+
+                    {/* Delete Button */}
+                    <div className={styles.colAction}>
+                      <button
+                        className={styles.deleteBtn}
+                        onClick={() => handleDeleteExpense(tx.id)}
+                      >
+                        &#128465;
+                      </button>
+                    </div>
                   </div>
                 ))
               )}
@@ -111,6 +142,37 @@ const ExpensePage = () => {
       </div>
     </>
   );
+};
+
+const getFilteredData = (expenses, categoryFilter, timeFilter) => {
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
+
+  return expenses.filter((item) => {
+    // --- Category Filter ---
+    const matchesCategory =
+      categoryFilter === "All Categories" || item.category === categoryFilter;
+
+    // --- Time Filter ---
+    let matchesTime = true;
+    const itemDate = new Date(item.date);
+
+    if (timeFilter === "This Month") {
+      matchesTime =
+        itemDate.getMonth() === currentMonth &&
+        itemDate.getFullYear() === currentYear;
+    } else if (timeFilter === "Last Month") {
+      const lastMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+      const yearOfLastMonth =
+        currentMonth === 0 ? currentYear - 1 : currentYear;
+      matchesTime =
+        itemDate.getMonth() === lastMonth &&
+        itemDate.getFullYear() === yearOfLastMonth;
+    }
+
+    return matchesCategory && matchesTime;
+  });
 };
 
 export default ExpensePage;
