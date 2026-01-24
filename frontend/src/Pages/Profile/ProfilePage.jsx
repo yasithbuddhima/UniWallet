@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "./ProfilePage.module.css";
+import { useUser } from "../../context/UserContext";
 
 const ProfilePage = () => {
   const [reminders, setReminders] = useState(false);
   const [emailSummary, setEmailSummary] = useState(true);
+  const { user } = useUser();
 
   const handleNav = (link) => alert("Navigating to: " + link);
   const handleLogout = () => alert("Are you sure?") && alert("Logged out!");
@@ -13,7 +15,7 @@ const ProfilePage = () => {
     <div className={styles.bodyWrapper}>
       <div className={styles.appContainer}>
         <div className={`${styles.card} ${styles.userProfile}`}>
-          <h1 style={{ margin: 0 }}>Alex Chen</h1>
+          <h1 style={{ margin: 0 }}>{user?.displayName || "Your Name"}</h1>
           <div className={styles.statusBadge}>Level 3 Saver</div>
         </div>
 
