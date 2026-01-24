@@ -1,15 +1,18 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Components/NavBar/NavBar";
 import { ExpenseProvider } from "../context/ExpenseContext";
+import { ReminderProvider } from "../context/ReminderContext";
 
 export default function RootLayout() {
   return (
     <>
       <ExpenseProvider>
-        <Navbar />
-        <main>
-          <Outlet />
-        </main>
+        <ReminderProvider>
+          <Navbar />
+          <main>
+            <Outlet />
+          </main>
+        </ReminderProvider>
       </ExpenseProvider>
     </>
   );
