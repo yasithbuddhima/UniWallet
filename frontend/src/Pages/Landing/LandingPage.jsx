@@ -8,7 +8,6 @@ import trustimage3 from "./trustimage3.png";
 import trustimage4 from "./trustimage4.png";
 import trustimage5 from "./trustimage5.png";
 import trustimage6 from "./trustimage6.png";
-import logo from "./logo.png";
 import hero from "./hero.png";
 
 const LandingPage = () => {
@@ -17,7 +16,7 @@ const LandingPage = () => {
       <div className={style.body}>
         <section className={style.navbar}>
           <h2 className={style.logo}>
-            <img src={logo} alt="logo" className={style.logoimg} />
+            <img src="/logo192.png" alt="logo" className={style.logoimg} />
             uniwallet
           </h2>
           <div className={style.button}>
@@ -107,7 +106,7 @@ const LandingPage = () => {
         <section className={style.endnote}>
           <div className={style.endnotetext}>
             <h2>
-              <img src={logo} alt="logo" className={style.logoimg} />
+              <img src="/logo.png" alt="logo" className={style.logoimg} />
               Uniwallet
             </h2>
             <p>Set goals for spring break, avoid smarter money today</p>

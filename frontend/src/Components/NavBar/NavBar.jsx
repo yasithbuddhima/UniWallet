@@ -20,8 +20,7 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
         <div className={styles.logo}>
-          {/* //TODO: Add Logo */}
-
+          <img src="/logo192.png" alt="logo" className={styles.logoImg} />
           <span>UniWallet</span>
         </div>
 
@@ -48,7 +47,6 @@ const Navbar = () => {
 
         <div className={styles.userSection}>
           <NavLink to="/profile" className={styles.profileLink}>
-            {/* //TODO: Add dummy profile pic */}
             <img
               src={user?.photoURL || defaultAvatar}
               alt="Profile"

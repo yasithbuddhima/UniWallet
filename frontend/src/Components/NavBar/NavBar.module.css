@@ -28,6 +28,11 @@
   font-weight: 800;
 }
 
+.logoImg {
+  height: 40px;
+  width: auto;
+}
+
 .links {
   display: flex;
   margin-left: 5vw;
