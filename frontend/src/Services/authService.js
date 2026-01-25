@@ -103,7 +103,7 @@ export async function loginWithGoogle() {
 // Method To SignOut/LogOut
 export async function userSignout() {
   try {
-    await signOut();
+    await signOut(auth);
     localStorage.removeItem("token");
     logEvent(analytics, "SignOut");
     return { success: true };
