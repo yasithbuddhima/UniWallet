@@ -40,7 +40,7 @@ expenseRouter.post("/update", async (req, res) => {
 // req.body should be the expense id
 expenseRouter.post("/delete", async (req, res) => {
   try {
-    const success = await deleteExpense(req.user.uid, req.body);
+    const success = await deleteExpense(req.user.uid, req.body.id);
     res.status(201).json(success);
   } catch (error) {
     res.status(500).json({ error: error.message });

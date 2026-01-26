@@ -46,7 +46,11 @@ const deleteExpense = async (token, expenseId) => {
     body: JSON.stringify({ id: expenseId }),
   });
 
-  return res.json();
+  const data = await res.json();
+  return {
+    status: res.status,
+    data: data,
+  };
 };
 
 export { getAllExpenses, addExpense, deleteExpense, updateExpense };
