@@ -28,7 +28,7 @@ const DashBoard = () => {
         <div className={styles.card}>
           <label>Total Expenses</label>
           <h2>Rs. {Number(totalExpense).toLocaleString("en-LK")}</h2>
-          <p className={styles.negative}>This Month</p>
+          <p>This Month</p>
         </div>
 
         <div className={styles.card}>

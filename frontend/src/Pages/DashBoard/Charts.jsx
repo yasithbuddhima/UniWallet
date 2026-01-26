@@ -12,7 +12,7 @@ import {
   Legend,
 } from "recharts";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
+const COLORS = ["#0059ff", "#00C49F", "#ffae00", "#ff0000", "#8884d8"];
 
 const ExpensesBarchart = ({ expenses }) => {
   const dailyData = getDailySpendingData(expenses);
@@ -20,7 +20,7 @@ const ExpensesBarchart = ({ expenses }) => {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
       <div style={{ width: "100%", minWidth: "300px", height: "300px" }}>
-        <h4>Monthly Spending by Date</h4>
+        <h3>Monthly Spending by Date</h3>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={dailyData}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -47,14 +47,14 @@ const ExpensesPieChart = ({ expenses }) => {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
       <div style={{ width: "100%", minWidth: "300px", height: "300px" }}>
-        <h4>Expenses by Category</h4>
+        <h3>Expenses by Category</h3>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={categoryData}
-              innerRadius={60}
-              outerRadius={80}
-              paddingAngle={5}
+              innerRadius={85}
+              outerRadius={120}
+              paddingAngle={3}
               dataKey="value"
             >
               {categoryData.map((entry, index) => (
