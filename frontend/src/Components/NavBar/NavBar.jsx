@@ -3,9 +3,10 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../utils/firebase";
 import styles from "./NavBar.module.css";
 import { userSignout } from "../../Services/authService";
+import { useUser } from "../../context/UserContext";
 
 const Navbar = () => {
-  const user = auth.currentUser;
+  const { user } = useUser();
   const defaultAvatar = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
   const navigate = useNavigate();
   const logout = async () => {
@@ -48,7 +49,7 @@ const Navbar = () => {
         <div className={styles.userSection}>
           <NavLink to="/profile" className={styles.profileLink}>
             <img
-              src={user?.photoURL || defaultAvatar}
+              src={user && user.photoURL ? user.photoURL : defaultAvatar}
               alt="Profile"
               className={styles.avatar}
             />
