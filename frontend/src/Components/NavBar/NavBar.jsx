@@ -4,6 +4,7 @@ import { auth } from "../../utils/firebase";
 import styles from "./NavBar.module.css";
 import { userSignout } from "../../Services/authService";
 import { useUser } from "../../context/UserContext";
+import AppLogo from "../AppLogo/AppLogo";
 
 const Navbar = () => {
   const { user } = useUser();
@@ -20,10 +21,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
-        <div className={styles.logo}>
-          <img src="/logo192.png" alt="logo" className={styles.logoImg} />
-          <span>UniWallet</span>
-        </div>
+        <AppLogo />
 
         <div className={styles.links}>
           <NavLink

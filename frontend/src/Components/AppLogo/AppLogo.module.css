@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap");
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #84cc16;
+  font-size: 1.5rem;
+  font-family: "Lobster Two", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.logoImg {
+  height: 40px;
+  width: auto;
+}
