@@ -110,6 +110,10 @@ button:hover {
   color: #333;
   border: 1px solid #ddd;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
 
 .googleBtn:hover {

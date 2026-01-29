@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "motion/react";
 import styles from "./AuthPage.module.css";
 import signInImg from "../../assets/signin.png";
 import logInImg from "../../assets/login.png";
+import { FcGoogle } from "react-icons/fc";
+
 import {
   logInWithEmail,
   loginWithGoogle,
@@ -184,7 +186,8 @@ const SignInForm = ({ onSubmit, handleGoogle }) => {
             className={styles.googleBtn}
             onClick={handleGoogle}
           >
-            Continue with Google
+            <FcGoogle size="25px" />
+            &nbsp; Continue with Google
           </button>
         </form>
       </div>
@@ -221,7 +224,8 @@ const LoginForm = ({ onSubmit, handleGoogle }) => {
             className={styles.googleBtn}
             onClick={handleGoogle}
           >
-            Continue with Google
+            <FcGoogle size="25px" />
+            &nbsp; Continue with Google
           </button>
         </form>
       </div>
