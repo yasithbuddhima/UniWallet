@@ -81,7 +81,7 @@ const Landingpage = () => {
 const FeaturesSection = () => {
   return (
     <>
-      <section className={style.middle}>
+      <section className={style.middle} id="features">
         <h1 className={style.stitle}>Features</h1>
         <p className={style.sdescription}>
           UniWallet is packed with powerful features designed to make student
@@ -130,7 +130,7 @@ const FeaturesSection = () => {
 const Testimonials = () => {
   return (
     <>
-      <section className={style.testimonials}>
+      <section className={style.testimonials} id="testimonials">
         <h1 className={style.stitle}>Loved by Students</h1>
         <p className={style.sdescription}>
           See what fellow students are saying about how UniWallet transformed
@@ -195,7 +195,7 @@ const Footer = () => {
   return (
     <>
       <hr className={style.hr} />
-      <div className={style.footer}>
+      <div className={style.footer} id="contact">
         <div className={style.app}>
           <AppLogo />
           <div className={style.des}>Smart expense tracking for students.</div>
@@ -213,10 +213,12 @@ const Footer = () => {
         </div>
         <div className={style.column}>
           <div className={style.title}>Connect</div>
-          <div className={style.items}>
-            <PiGithubLogo />
-            GitHub
-          </div>
+          <a href="https://github.com/yasithbuddhima/uniwallet">
+            <div className={style.items}>
+              <PiGithubLogo />
+              GitHub
+            </div>
+          </a>
         </div>
       </div>
       <hr className={style.hr} />

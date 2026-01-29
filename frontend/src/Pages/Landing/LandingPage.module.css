@@ -17,6 +17,9 @@
   margin: 0;
   font-family: "Inter", sans-serif;
 }
+.body a {
+  all: unset;
+}
 .header {
   position: sticky;
   top: 0;
@@ -42,7 +45,7 @@
   color: #f5f6f6;
   padding: 0 15px;
   cursor: pointer;
-  background-color: #121212;
+  background-color: #00000000;
 }
 
 .btn button {
