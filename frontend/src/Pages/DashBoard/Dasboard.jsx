@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import { useReminders } from "../../context/ReminderContext";
 import { ExpensesBarchart, ExpensesPieChart } from "./Charts";
+import { auth } from "../../utils/firebase";
 
 const DashBoard = () => {
   const navigate = useNavigate();
@@ -58,16 +59,27 @@ const DashBoard = () => {
 
         <div className={styles.card}>
           <label>Next Reminder</label>
-          <h3> {nextReminder?.name}</h3>
-          <p
-            className={
-              nextReminder?.status === "overdue"
-                ? styles.negative
-                : styles.warning
-            }
-          >
-            Due {nextReminderDate} - Rs. {nextReminder?.value}
-          </p>
+          {!nextReminder ? (
+            <div
+              className={styles.placeholder}
+              style={{ minHeight: "70px", fontSize: "15px" }}
+            >
+              Add a new reminder to start tracking your future spending.
+            </div>
+          ) : (
+            <>
+              <h3> {nextReminder?.name}</h3>
+              <p
+                className={
+                  nextReminder?.status === "overdue"
+                    ? styles.negative
+                    : styles.warning
+                }
+              >
+                Due {nextReminderDate} - Rs. {nextReminder?.value}
+              </p>
+            </>
+          )}
         </div>
 
         <div className={styles.card + " " + styles.addExpenseCard}>

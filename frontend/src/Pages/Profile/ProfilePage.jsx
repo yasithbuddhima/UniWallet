@@ -31,11 +31,7 @@ const ProfilePage = () => {
         "Are you sure you want to delete your account? This action cannot be undone.",
       )
     ) {
-      if (
-        window.confirm(
-          "This will permanently delete all your data. Type your email to confirm.",
-        )
-      ) {
+      if (window.confirm("This will permanently delete all your data.")) {
         try {
           const currentUser = auth.currentUser;
           if (currentUser) {

@@ -49,6 +49,7 @@ const Navbar = () => {
             <img
               src={user && user.photoURL ? user.photoURL : defaultAvatar}
               alt="Profile"
+              referrerPolicy="no-referrer"
               className={styles.avatar}
             />
           </NavLink>
