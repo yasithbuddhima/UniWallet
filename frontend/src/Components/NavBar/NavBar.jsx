@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { auth } from "../../utils/firebase";
 import styles from "./NavBar.module.css";
 import { userSignout } from "../../Services/authService";
+import { useUser } from "../../context/UserContext";
+import AppLogo from "../AppLogo/AppLogo";
 
 const Navbar = () => {
-  const user = auth.currentUser;
+  const { user } = useUser();
   const defaultAvatar = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
   const navigate = useNavigate();
   const logout = async () => {
@@ -19,10 +20,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
-        <div className={styles.logo}>
-          <img src="/logo192.png" alt="logo" className={styles.logoImg} />
-          <span>UniWallet</span>
-        </div>
+        <AppLogo />
 
         <div className={styles.links}>
           <NavLink
@@ -48,8 +46,9 @@ const Navbar = () => {
         <div className={styles.userSection}>
           <NavLink to="/profile" className={styles.profileLink}>
             <img
-              src={user?.photoURL || defaultAvatar}
+              src={user && user.photoURL ? user.photoURL : defaultAvatar}
               alt="Profile"
+              referrerPolicy="no-referrer"
               className={styles.avatar}
             />
           </NavLink>

@@ -6,7 +6,6 @@
   align-items: center;
   background-color: #1f2933;
   font-family: Arial, sans-serif;
-  padding: 20px;
 }
 
 .authcontainer {
@@ -110,6 +109,10 @@ button:hover {
   color: #333;
   border: 1px solid #ddd;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
 
 .googleBtn:hover {

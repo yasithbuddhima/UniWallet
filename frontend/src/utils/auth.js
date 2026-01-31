@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 
 export function isAuthenticated() {
-  const _token = localStorage.getItem("token");
+  const _token = sessionStorage.getItem("token");
   console.log(!!_token ? "Token Saved" : "Error saving the token");
   return !!_token;
 }

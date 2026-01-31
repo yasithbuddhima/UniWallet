@@ -5,6 +5,7 @@ const authRoutes = require("./routes/auth.routes");
 const expenseRoutes = require("./routes/expense.routes");
 const authMiddleware = require("./middleware/auth.middleware");
 const reminderRoutes = require("./routes/reminder.routes");
+const userRoutes = require("./routes/user.routes");
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/expense", authMiddleware, expenseRoutes);
 
 app.use("/api/reminders", authMiddleware, reminderRoutes);
+
+app.use("/api/user", authMiddleware, userRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend is working on port 5000" });

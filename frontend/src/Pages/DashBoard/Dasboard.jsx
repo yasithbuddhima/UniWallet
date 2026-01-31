@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import { useReminders } from "../../context/ReminderContext";
 import { ExpensesBarchart, ExpensesPieChart } from "./Charts";
+import { useUser } from "../../context/UserContext";
 
 const DashBoard = () => {
   const navigate = useNavigate();
@@ -17,8 +18,7 @@ const DashBoard = () => {
   const displayedExpenses = expenses.slice(0, 5);
 
   const totalExpense = getTotalExpenseInMonth();
-  // TODO: get this from User
-  const budget = 20000;
+  const { budget } = useUser();
 
   const percentage = Math.min((totalExpense / budget) * 100, 100);
 
@@ -28,7 +28,7 @@ const DashBoard = () => {
         <div className={styles.card}>
           <label>Total Expenses</label>
           <h2>Rs. {Number(totalExpense).toLocaleString("en-LK")}</h2>
-          <p className={styles.negative}>This Month</p>
+          <p>This Month</p>
         </div>
 
         <div className={styles.card}>
@@ -58,16 +58,27 @@ const DashBoard = () => {
 
         <div className={styles.card}>
           <label>Next Reminder</label>
-          <h3> {nextReminder?.name}</h3>
-          <p
-            className={
-              nextReminder?.status === "overdue"
-                ? styles.negative
-                : styles.warning
-            }
-          >
-            Due {nextReminderDate} - Rs. {nextReminder?.value}
-          </p>
+          {!nextReminder ? (
+            <div
+              className={styles.placeholder}
+              style={{ minHeight: "70px", fontSize: "15px" }}
+            >
+              Add a new reminder to start tracking your future spending.
+            </div>
+          ) : (
+            <>
+              <h3> {nextReminder?.name}</h3>
+              <p
+                className={
+                  nextReminder?.status === "overdue"
+                    ? styles.negative
+                    : styles.warning
+                }
+              >
+                Due {nextReminderDate} - Rs. {nextReminder?.value}
+              </p>
+            </>
+          )}
         </div>
 
         <div className={styles.card + " " + styles.addExpenseCard}>

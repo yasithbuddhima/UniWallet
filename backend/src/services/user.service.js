@@ -20,7 +20,7 @@ const createUserProfile = async (user) => {
     },
     {
       merge: true,
-    }
+    },
   );
 };
 
@@ -45,4 +45,32 @@ const deleteUserCompletely = async (uid) => {
   }
 };
 
-module.exports = { createUserProfile, getUser, deleteUserCompletely };
+const getUserBudget = async (uid) => {
+  try {
+    const userRef = db.collection("users").doc(uid);
+    const doc = await userRef.get();
+    if (doc.exists) {
+      const userData = doc.data();
+      return userData.budget || 20000;
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
+const updateUserBudget = async (uid, budget) => {
+  try {
+    const userRef = db.collection("users").doc(uid);
+    await userRef.update({ budget });
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = {
+  createUserProfile,
+  getUser,
+  deleteUserCompletely,
+  getUserBudget,
+  updateUserBudget,
+};

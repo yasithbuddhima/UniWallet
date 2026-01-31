@@ -1,233 +1,261 @@
+/* ! In Auth.module.css file there is a global style for button. 
+   ! Eroor didnt catched untill dd5036a0123a86548ed6645292b665ef0d0c7074
+   ! Here is the code to unset the styles */
+
+.body button {
+  all: unset;
+}
+
+/* ! */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+/* Header */
 .body {
   background-color: #121212;
-  padding-top: 10px;
+  width: 100%;
+  min-height: 150vh;
+  margin: 0;
+  font-family: "Inter", sans-serif;
 }
-
+.body a {
+  all: unset;
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  background-color: null;
+  padding: 10px 25px;
+}
 .navbar {
-  background-color: #1f2933;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 50px;
-  border-radius: 50px;
-  height: 30px;
-  margin-top: 20px;
-}
-
-.button {
-  justify-content: center;
-  display: flex;
-  gap: 10px;
-}
-
-.logo {
-  color: #f1f5f9;
-  margin-top: 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
 }
-
-.logoimg {
-  height: 40px;
+.links a {
+  all: unset;
 }
-
-.login {
-  background-color: #1f2933;
-  border: none;
-  color: #84cc16;
-  padding-right: 15px;
-  width: fit-content;
-}
-
-.btn {
-  background: linear-gradient(to right, #315204, #84cc16);
-  color: black;
-  padding: 10px;
-  height: 40px;
-  border: none;
-  border-radius: 20px;
+.links button {
+  color: #9ca3af;
+  padding: 0 15px;
   cursor: pointer;
-  width: fit-content;
 }
-
-.btngreen {
-  background: #84cc16;
-  border-radius: 20px;
-  padding: 10px 15px;
+.links a button:hover {
+  color: #f5f6f6;
+  padding: 0 15px;
   cursor: pointer;
-  font-weight: bold;
-  color: #121212;
-  width: fit-content;
+  background-color: #00000000;
 }
 
-.btng2 {
-  background-color: #121212;
-  color: #2dd4bf;
-  border: none;
-  margin-left: 20px;
-  width: fit-content;
+.btn button {
+  cursor: pointer;
+  margin: 0 5px;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
+
+.btn .login {
+  color: #f5f6f6;
+}
+.login:hover {
+  background-color: #2dd4bf;
+}
+.btn .signup {
+  background-color: #84cc16;
+}
+.signup:hover {
+  background-color: #66a00f;
+}
+/* Hero */
 
 .hero {
+  text-align: center;
+  margin: 30px auto;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0 auto;
+  font-weight: bold;
+  color: #f5f6f6;
+}
+
+.hero .colored {
+  color: #84cc16;
+}
+
+.hero p {
+  color: #f5f6f6;
+  padding: 20px auto;
+  line-height: 1.5rem;
+  font-size: large;
+}
+
+.hero .signup {
+  cursor: pointer;
+  background-color: #84cc16;
+  margin: 0 10px;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.hero .signup:hover {
+  background-color: #66a00f;
+}
+
+.hero .more {
+  cursor: pointer;
+  border: 1px solid #374251;
+  color: #f5f6f6;
+  margin: 0 5px;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.hero .more:hover {
+  background-color: #2dd4bf;
+}
+
+.middle {
+  padding: 25px 10px;
+  background-color: #141618;
+  text-align: center;
+}
+
+.middle .stitle,
+.testimonials .stitle {
+  color: #f5f6f6;
+  font-size: 3rem;
+}
+.middle .sdescription,
+.testimonials .sdescription {
+  color: #9ca3af;
+  font-size: 1.5rem;
+}
+.cardlayout {
   display: flex;
-  justify-content: space-evenly;
+  gap: 20px;
+  align-content: space-evenly;
+  padding: 20px 150px;
+}
+.card {
+  display: flex;
   align-items: center;
-  padding: 60px;
+  flex-direction: column;
+  background-color: #202932;
+  padding: 20px;
+  border: 1px solid #9ca3af60;
+  border-radius: 20px;
 }
 
-.herotext {
-  width: 50%;
+.middle .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #84cc16;
 }
 
-.herotext h1 {
-  font-size: 40px;
-  margin-bottom: 15px;
-  color: #f1f5f9;
+.card .icon {
+  width: fit-content;
+  border-radius: 100px;
+  background-color: #66a00f2a;
+  padding: 20px;
+}
+.card .cardtitle {
+  font-size: 1.5rem;
+  color: #f5f6f6;
+  margin: 0;
+  margin-top: 10px;
 }
 
-.herotext p {
-  margin-bottom: 20px;
+.card .cardDescription {
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+.testimonials {
+  padding: 25px 10px;
+  text-align: center;
   color: #9ca3af;
 }
-
-.heroimage {
-  height: 350px;
+.testimonials .cardlayout {
+  text-align: left;
 }
-
-.heroimage img {
-  max-height: 100%;
-  height: auto;
-}
-
-.trust {
-  background-color: #1f2933;
-  color: #f1f5f9;
-  text-align: center;
-  padding: 20px 50px;
-}
-
-.trust h2 {
-  text-align: center;
-  color: #f1f5f9;
-}
-
-.trustimage {
+.profile {
   display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-  height: 100px;
-}
-
-.features {
-  padding: 60px;
-  text-align: center;
-}
-
-.features h2 {
-  color: #f1f5f9;
-}
-
-.cards {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 40px;
-}
-
-.card {
-  background-color: #1f2933;
+  flex-direction: row;
+  width: 100%;
   padding: 20px;
-  width: 220px;
-  border-radius: 16px;
-  color: whitesmoke;
-  border: 2px solid #609510;
-}
-
-.cta {
-  background: #6095107e;
-  padding: 20px 30px;
-  text-align: center;
-  border-radius: 500px;
-}
-
-.cta h1 {
-  margin-bottom: 20px;
-  color: #f1f5f9;
-}
-
-.cta p {
-  color: #f1f5f9;
-  margin-bottom: 20px;
-}
-
-.btn2 {
-  padding: 10px;
-  background-color: #f1f5f9;
-  color: #132f27;
-  font-weight: bold;
-  border-radius: 50px;
-  width: fit-content;
-}
-
-.financial1 {
-  display: flex;
-  justify-content: center;
-  padding: 50px 0;
-}
-
-.financialtext1 {
-  width: 30%;
-  color: #f1f5f9;
-  margin-left: 50px;
-}
-
-.financialimage1 {
-  display: flex;
-  justify-content: right;
-  align-items: right;
-  width: 40%;
-  height: 200px;
-  margin-right: 50px;
-}
-
-.financial2 {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 50px;
-}
-
-.financialimage2 {
-  display: flex;
   justify-content: left;
-  align-items: left;
-  width: 40%;
-  height: 200px;
-  margin-left: 50px;
-}
-
-.financialtext2 {
-  width: 30%;
-  color: #f1f5f9;
-  margin-right: 50px;
-}
-
-.endnote {
-  color: #f1f5f9;
-  display: flex;
-  justify-content: space-around;
-  background-color: #1f2933;
-  margin-top: 50px;
-  /* display: grid; */
-  /* grid-template-columns: 2fr 1fr 1fr 1fr; */
-}
-
-.endnotetext h2 {
-  display: flex;
   align-items: center;
+}
+.propic img {
+  height: 50px;
+}
+
+.details {
+  padding: 10px 5px;
+}
+.details .name {
+  color: #f5f6f6;
+  font-weight: bold;
+}
+.details .fac {
+  font-size: 14px;
+}
+
+.hr {
+  background-color: #9ca3af;
+  padding: 20px auto;
+  height: 1px;
+  border: none;
+
+  margin: 0;
 }
 
 .footer {
+  padding: 50px 30px;
+  display: flex;
+  gap: 20px;
+}
+.app {
+  flex: 1;
+}
+.app .des {
+  color: #9ca3af;
+  font-size: 15px;
+  padding: 20px 0;
+}
+.column {
+  flex: 1;
+  padding: 0 20px;
+}
+.column .title {
+  color: #f5f6f6;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.column .items {
+  color: #9ca3af;
+  padding-bottom: 10px;
+  font-size: 15px;
+}
+.column .items:hover {
+  cursor: pointer;
+  color: #f5f6f6;
+}
+.footertxt {
+  color: #9ca3af;
   text-align: center;
-  padding-bottom: 20px;
-  color: #aaa;
+  padding: 20px;
+  font-size: 15px;
+}
+
+.heroimg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+.heroimg img {
+  width: 60%;
 }

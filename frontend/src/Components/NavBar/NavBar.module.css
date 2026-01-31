@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap");
+
 .navbar {
   background-color: #1f2933;
   border-bottom: 1px solid #374151;
@@ -8,6 +10,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .navContainer {
@@ -17,20 +20,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #84cc16;
-  font-size: 1.5rem;
-  font-weight: 800;
-}
-
-.logoImg {
-  height: 40px;
-  width: auto;
 }
 
 .links {

@@ -10,8 +10,17 @@ const ProfilePage = () => {
   const [reminders, setReminders] = useState(false);
   const [emailSummary, setEmailSummary] = useState(true);
   const [expandedPersonal, setExpandedPersonal] = useState(false);
+  const [expandedBudget, setExpandedBudget] = useState(false);
+  const [isEditingBudget, setIsEditingBudget] = useState(false);
+  const { budget, updateBudget } = useUser();
+  const [tempBudget, setTempBudget] = useState(budget);
   const { user } = useUser();
   const navigate = useNavigate();
+
+  const handleUpdateBudget = () => {
+    updateBudget(tempBudget);
+    setIsEditingBudget(false);
+  };
 
   const handleLogout = async () => {
     if (window.confirm("Are you sure you want to sign out?")) {
@@ -31,11 +40,7 @@ const ProfilePage = () => {
         "Are you sure you want to delete your account? This action cannot be undone.",
       )
     ) {
-      if (
-        window.confirm(
-          "This will permanently delete all your data. Type your email to confirm.",
-        )
-      ) {
+      if (window.confirm("This will permanently delete all your data.")) {
         try {
           const currentUser = auth.currentUser;
           if (currentUser) {
@@ -103,7 +108,67 @@ const ProfilePage = () => {
               </motion.div>
             )}
           </AnimatePresence>
+          {/* NEXT SECTION */}
+          <div
+            className={styles.listRow}
+            onClick={() => setExpandedBudget(!expandedBudget)}
+          >
+            <div className={styles.rowContent}>
+              <span className={styles.rowIcon}>💰</span>
+              <span className={styles.rowTitle}>Budget Goal</span>
+            </div>
+            <div className={styles.budgetPreview}>
+              Rs. {Number(budget).toLocaleString()}
+            </div>
+            <motion.div
+              animate={{ rotate: expandedBudget ? 90 : 0 }}
+              className={styles.nextArrow}
+            >
+              ›
+            </motion.div>
+          </div>
+          <AnimatePresence>
+            {expandedBudget && (
+              <motion.div
+                className={styles.expandedDiv}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+              >
+                <div className={styles.budgetEditContainer}>
+                  {isEditingBudget ? (
+                    <div className={styles.inputGroup}>
+                      <input
+                        type="number"
+                        value={tempBudget}
+                        onChange={(e) => setTempBudget(e.target.value)}
+                        className={styles.budgetInput}
+                        autoFocus
+                      />
+                      <button
+                        onClick={handleUpdateBudget}
+                        className={styles.saveBtn}
+                      >
+                        Save
+                      </button>
+                    </div>
+                  ) : (
+                    <div
+                      className={styles.budgetDisplay}
+                      onClick={() => setIsEditingBudget(true)}
+                    >
+                      <span className={styles.budgetValue}>
+                        Rs. {Number(budget).toLocaleString()}
+                      </span>
+                      <span className={styles.editLabel}>Tap to edit</span>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
+
         <div className={styles.groupLabel}>SETTINGS</div>
         <div className={`${styles.card} ${styles.listWrapper}`}>
           <div

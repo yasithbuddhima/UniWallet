@@ -47,8 +47,14 @@ export const ExpenseProvider = ({ children }) => {
   // delete is not allowed ???
   const deleteIt = async (expenseId) => {
     const token = await auth.currentUser.getIdToken();
-    await deleteExpense(token, expenseId);
-    setExpenses((prev) => prev.filter((item) => item.id !== expenseId));
+    const res = await deleteExpense(token, expenseId);
+    console.log(res);
+    if (res.status === 201) {
+      console.log("Success:", res.data.message);
+      setExpenses((prev) => prev.filter((item) => item.id !== expenseId));
+    } else if (res.status === 500) {
+      console.error("Error:", res.data.error || "Something went wrong");
+    }
   };
 
   const getTotalExpenseInMonth = () => {
