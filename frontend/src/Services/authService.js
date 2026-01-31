@@ -36,7 +36,7 @@ export async function signUpWithEmail(email, password, name) {
     await updateProfile(auth.currentUser, {
       displayName: name,
     });
-    localStorage.setItem("token", idToken);
+    sessionStorage.setItem("token", idToken);
     logEvent(analytics, "signUp", { method: "Email+Password" });
     return { success: true };
   } catch (error) {
@@ -65,7 +65,7 @@ export async function logInWithEmail(email, password) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
 
-    localStorage.setItem("token", idToken);
+    sessionStorage.setItem("token", idToken);
     logEvent(analytics, "signIn", { method: "Email+Password" });
     return { success: true };
   } catch (error) {
@@ -92,7 +92,7 @@ export async function loginWithGoogle() {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
 
-    localStorage.setItem("token", idToken);
+    sessionStorage.setItem("token", idToken);
     logEvent(analytics, "LogIn", { method: "Google" });
     return { success: true };
   } catch (error) {
@@ -104,7 +104,7 @@ export async function loginWithGoogle() {
 export async function userSignout() {
   try {
     await signOut(auth);
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     logEvent(analytics, "SignOut");
     return { success: true };
   } catch (error) {
@@ -116,7 +116,7 @@ export async function userSignout() {
 export async function deleteUserAndSignOut() {
   try {
     await deleteUser(auth);
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     return { success: true };
   } catch (error) {
     return { success: false, error: error };
