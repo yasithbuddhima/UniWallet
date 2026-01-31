@@ -11,9 +11,11 @@ import {
   signUpWithEmail,
 } from "../../Services/authService";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Loadingpage } from "../../Components/LoadingPage/LoadingPage";
 
 const Authpage = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,6 +28,7 @@ const Authpage = () => {
   }, [location.pathname]);
 
   const handleEmailSignUp = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     const _email = e.target.mail.value;
@@ -38,6 +41,7 @@ const Authpage = () => {
       console.log("Signed In Successfully");
       navigate("/dashboard");
     } else {
+      setIsLoading(false);
       let errorMessage = "Authentication failed";
       switch (result.error.code) {
         case "auth/email-already-in-use":
@@ -57,6 +61,7 @@ const Authpage = () => {
   };
 
   const handleEmailSignIn = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     const _email = e.target.mail.value;
@@ -67,6 +72,7 @@ const Authpage = () => {
       console.log("Login Successfully");
       navigate("/dashboard");
     } else {
+      setIsLoading(false);
       let errorMessage = "Authentication failed";
       switch (result.error.code) {
         case "auth/user-not-found":
@@ -86,11 +92,13 @@ const Authpage = () => {
   };
 
   const handleGoogleLogin = async () => {
+    setIsLoading(true);
     const result = await loginWithGoogle();
     if (result.success) {
       console.log("Login with Google Successfully");
       navigate("/dashboard");
     } else {
+      setIsLoading(false);
       let errorMessage = "Authentication failed";
       switch (result.error.code) {
         case "auth/popup-blocked":
@@ -118,6 +126,7 @@ const Authpage = () => {
   };
   return (
     <>
+      {isLoading ? <Loadingpage /> : null}
       <div className={styles.authpage}>
         <AnimatePresence mode="wait">
           {isLogin ? (
