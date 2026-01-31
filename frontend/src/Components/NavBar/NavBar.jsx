@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { auth } from "../../utils/firebase";
 import styles from "./NavBar.module.css";
 import { userSignout } from "../../Services/authService";
 import { useUser } from "../../context/UserContext";

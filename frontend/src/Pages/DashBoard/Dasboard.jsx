@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import { useReminders } from "../../context/ReminderContext";
 import { ExpensesBarchart, ExpensesPieChart } from "./Charts";
-import { auth } from "../../utils/firebase";
+import { useUser } from "../../context/UserContext";
 
 const DashBoard = () => {
   const navigate = useNavigate();
@@ -18,8 +18,7 @@ const DashBoard = () => {
   const displayedExpenses = expenses.slice(0, 5);
 
   const totalExpense = getTotalExpenseInMonth();
-  // TODO: get this from User
-  const budget = 20000;
+  const { budget } = useUser();
 
   const percentage = Math.min((totalExpense / budget) * 100, 100);
 

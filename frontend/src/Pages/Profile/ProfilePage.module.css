@@ -137,3 +137,66 @@
 .dangerText {
   color: #ef4444 !important;
 }
+
+/* Budget */
+.budgetPreview {
+  margin-left: auto;
+  margin-right: 10px;
+  font-size: 14px;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.budgetEditContainer {
+  padding: 10px 0;
+}
+
+.budgetDisplay {
+  cursor: pointer;
+}
+
+.budgetValue {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.editLabel {
+  font-size: 12px;
+  color: #3b82f6;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.budgetInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.budgetInput input {
+  width: auto;
+  flex: 2;
+  margin: 0;
+}
+
+.saveBtn {
+  flex: 3;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
