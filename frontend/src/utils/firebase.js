@@ -15,12 +15,12 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_CONFIG_API_KEY,
-  authDomain: "uniwallet-5f2ff.firebaseapp.com",
-  projectId: "uniwallet-5f2ff",
-  storageBucket: "uniwallet-5f2ff.firebasestorage.app",
-  messagingSenderId: "488033136515",
-  appId: "1:488033136515:web:200b9bce8350c2555650b6",
-  measurementId: "G-DP7F837Z3Y",
+  authDomain: process.env.REACT_APP_FIREBASE_CONFIG_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_CONFIG_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_CONFIG_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_CONFIG_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_CONFIG_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_CONFIG_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
